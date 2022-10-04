@@ -1,0 +1,12 @@
+.header {
+  background-color: #ececec;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  grid-area: h;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+}
