@@ -1,0 +1,68 @@
+.profile {
+  padding: 0 100px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.avatar {
+  max-width: 200px;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  align-content: center;
+}
+
+.userInfo {
+  display: flex;
+}
+
+.userDescription {
+  margin-left: 50px;
+}
+
+.userDescrTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.userDescriptionItem {
+  margin-bottom: 10px;
+}
+
+.myPosts {
+  align-self: start;
+  margin: 40px 0;
+}
+
+.createPost {
+  display: flex;
+  flex-direction: column;
+}
+
+.textArea {
+  padding: 30px;
+  box-sizing: border-box;
+  margin: 20px 0;
+  width: 100%;
+  border-radius: 15px;
+  border: none;
+}
+
+.textArea:active {
+  border: none;
+}
+
+.addPostButton {
+  width: 30%;
+  border-radius: 15px;
+  height: 50px;
+  background-color: rgb(95, 91, 91);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.addPostButton:hover {
+  background-color: #000;
+}

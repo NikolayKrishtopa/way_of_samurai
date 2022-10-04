@@ -1,0 +1,8 @@
+.messagesSection {
+  display: grid;
+  grid-template-columns: 3fr 5fr;
+}
+
+.dialogs {
+  padding: 0 30px;
+}

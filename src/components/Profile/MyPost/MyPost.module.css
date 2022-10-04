@@ -1,0 +1,23 @@
+.myPost {
+  display: flex;
+  min-height: 30px;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 15px;
+  margin: 20px 0;
+}
+
+.myPostAva {
+  width: 25px;
+  border-radius: 50%;
+  height: 25px;
+  object-fit: cover;
+  align-content: center;
+  margin-right: 10px;
+}
+
+.myPostText {
+  font-size: 16px;
+}
