@@ -60,9 +60,15 @@
   background-color: rgb(95, 91, 91);
   color: #fff;
   border: none;
-  cursor: pointer;
 }
 
-.addPostButton:hover {
+.addPostButton_active {
+  cursor: pointer;
   background-color: #000;
+  transition: scale 0.5s ease-out;
+  scale: 1;
+}
+
+.addPostButton_active:hover {
+  scale: 1.05;
 }

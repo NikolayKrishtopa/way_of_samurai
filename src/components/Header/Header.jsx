@@ -5,6 +5,7 @@ export default function Header() {
   return (
     <div className={s.header}>
       <img src={logo} alt="логотип" className={s.logo} />
+      <img src={logo} alt="логотип" className={`${s.logo} ${s.logoReversed}`} />
     </div>
   )
 }

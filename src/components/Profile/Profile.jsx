@@ -2,18 +2,8 @@ import avatar from '../../pictures/avatar.jpg'
 import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
 
-const myPosts = [
-  'Привет! Мне скучно',
-  'Я пишу соцсеть',
-  'Но я слишком тупой',
-  'Что нового?',
-  'Кто последний из РФ, выключите свет!',
-  'Хочу хинкали',
-  'А может даже кебаб',
-  'В Грузии все вкусно',
-]
-
-export default function Profile() {
+export default function Profile(props) {
+  const { profile, onAddPost, onPostTextChange } = props
   return (
     <div className={s.profile}>
       <div className={s.userInfo}>
@@ -42,13 +32,26 @@ export default function Profile() {
         </div>
       </div>
       <div className={s.createPost}>
-        <textArea placeholder="Add post" className={s.textArea} />
-        <button className={s.addPostButton}>Add post</button>
+        <textarea
+          placeholder="Add post"
+          className={s.textArea}
+          value={profile.newPostText}
+          onChange={(e) => onPostTextChange(e, profile)}
+        />
+        <button
+          className={`${s.addPostButton} ${
+            profile.newPostText.length > 0 && s.addPostButton_active
+          }`}
+          onClick={() => onAddPost(profile, profile.newPostText)}
+          disabled={profile.newPostText.length === 0}
+        >
+          Add post
+        </button>
       </div>
       <div className={s.myPosts}>
         <h3 className={s.myPostsTitle}>My posts:</h3>
-        {myPosts.map((e) => (
-          <MyPost postText={e} />
+        {profile.posts.map((e, i) => (
+          <MyPost postText={e.text} key={e.id} likes={e.likes} />
         ))}
       </div>
     </div>

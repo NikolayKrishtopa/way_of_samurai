@@ -7,6 +7,8 @@
   background-color: #fff;
   border-radius: 15px;
   margin: 20px 0;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .myPostAva {
@@ -20,4 +22,28 @@
 
 .myPostText {
   font-size: 16px;
+  max-width: 75%;
+}
+
+.likesBlock {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+}
+
+.likesIcon {
+  cursor: pointer;
+  width: 20px;
+  margin-right: 5px;
+  transition: opacity 0.5s ease;
+  opacity: 100%;
+}
+
+.likesIcon:hover {
+  opacity: 60%;
+}
+
+.likesText {
+  font-size: 15px;
 }
