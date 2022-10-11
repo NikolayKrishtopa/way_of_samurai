@@ -53,25 +53,32 @@ const store = {
       newPostText: '',
     },
   },
-  renderByState() {},
-  getState() {
-    return this._state
-  },
-  addPost() {
+  _addPost() {
     this._state.profile.posts.unshift({
       text: this._state.profile.newPostText,
       id: this._state.profile.posts.length + 1,
       likes: 0,
     })
     this._state.profile.newPostText = ''
-    this.renderByState()
+    this._renderByState()
   },
-  handlePostTextChange(e) {
-    this._state.profile.newPostText = e.target.value
-    this.renderByState()
+  _handlePostTextChange(text) {
+    this._state.profile.newPostText = text
+    this._renderByState()
+  },
+
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      this._addPost()
+    } else if (action.type === 'CHANGE-POST-TEXT') {
+      this._handlePostTextChange(action.postText)
+    }
+  },
+  getState() {
+    return this._state
   },
   subscribe(observer) {
-    this.renderByState = observer
+    this._renderByState = observer
   },
 }
 

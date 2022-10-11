@@ -3,7 +3,17 @@ import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
 
 export default function Profile(props) {
-  const { profile, onAddPost, onPostTextChange } = props
+  const { profile, dispatch } = props
+
+  function handleAddPost() {
+    dispatch({ type: 'ADD-POST' })
+  }
+
+  function handlePostTextChange(e) {
+    const textValue = e.target.value
+    dispatch({ type: 'CHANGE-POST-TEXT', postText: textValue })
+  }
+
   return (
     <div className={s.profile}>
       <div className={s.userInfo}>
@@ -36,13 +46,13 @@ export default function Profile(props) {
           placeholder="Add post"
           className={s.textArea}
           value={profile.newPostText}
-          onChange={(e) => onPostTextChange(e, profile)}
+          onChange={handlePostTextChange}
         />
         <button
           className={`${s.addPostButton} ${
             profile.newPostText.length > 0 && s.addPostButton_active
           }`}
-          onClick={() => onAddPost(profile, profile.newPostText)}
+          onClick={handleAddPost}
           disabled={profile.newPostText.length === 0}
         >
           Add post

@@ -10,11 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 export default function renderWholeTree() {
   root.render(
     <BrowserRouter>
-      <App
-        state={store.getState()}
-        addPost={store.addPost.bind(store)}
-        onPostTextChange={store.handlePostTextChange.bind(store)}
-      />
+      <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
     </BrowserRouter>
   )
 }

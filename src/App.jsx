@@ -8,7 +8,7 @@ import Profile from './components/Profile/Profile'
 import Settings from './components/Settings/Settings'
 
 export default function App(props) {
-  const { state, onPostTextChange, addPost } = props
+  const { state, dispatch } = props
   const { profile, dialogs } = state
   return (
     <div className="page">
@@ -18,13 +18,7 @@ export default function App(props) {
         <Routes>
           <Route
             path="/profile"
-            element={
-              <Profile
-                profile={profile}
-                onPostTextChange={onPostTextChange}
-                onAddPost={addPost}
-              />
-            }
+            element={<Profile profile={profile} dispatch={dispatch} />}
           />
           <Route path="/messages/*" element={<Messages dialogs={dialogs} />} />
           <Route path="/news" element={<News />} />
