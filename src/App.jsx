@@ -9,7 +9,7 @@ import Settings from './components/Settings/Settings'
 
 export default function App(props) {
   const { state, dispatch } = props
-  const { profile, dialogs } = state
+  const { profile, conversations } = state
   return (
     <div className="page">
       <Header />
@@ -20,7 +20,10 @@ export default function App(props) {
             path="/profile"
             element={<Profile profile={profile} dispatch={dispatch} />}
           />
-          <Route path="/messages/*" element={<Messages dialogs={dialogs} />} />
+          <Route
+            path="/messages/*"
+            element={<Messages dialogs={conversations.dialogs} />}
+          />
           <Route path="/news" element={<News />} />
           <Route path="/music" element={<Music />} />
           <Route path="/settings" element={<Settings />} />

@@ -15,6 +15,21 @@ export default function Messages(props) {
         {dialogs[1].messages.map((e, i) => (
           <Message messageText={e} key={i} />
         ))}
+        <div className={s.sendMessage}>
+          <textarea
+            placeholder="Tape your message"
+            className={s.textArea}
+            // value={profile.newPostText}
+            // onChange={handlePostTextChange}
+          />
+          <button
+            className={`${s.sendMessageButton} ${s.sendMessageButton_active}`}
+            // onClick={handleAddPost}
+            // disabled={profile.newPostText.length === 0}
+          >
+            Add post
+          </button>
+        </div>
       </div>
     </div>
   )

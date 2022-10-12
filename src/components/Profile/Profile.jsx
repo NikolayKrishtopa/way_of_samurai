@@ -1,4 +1,8 @@
 import avatar from '../../pictures/avatar.jpg'
+import {
+  addPostActionCreator,
+  changePostTypeActionCreator,
+} from '../../redux/store'
 import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
 
@@ -6,12 +10,11 @@ export default function Profile(props) {
   const { profile, dispatch } = props
 
   function handleAddPost() {
-    dispatch({ type: 'ADD-POST' })
+    dispatch(addPostActionCreator())
   }
 
   function handlePostTextChange(e) {
-    const textValue = e.target.value
-    dispatch({ type: 'CHANGE-POST-TEXT', postText: textValue })
+    dispatch(changePostTypeActionCreator(e.target.value))
   }
 
   return (

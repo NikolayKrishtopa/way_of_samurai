@@ -6,3 +6,41 @@
 .dialogs {
   padding: 0 30px;
 }
+
+.sendMessage {
+  display: flex;
+  flex-direction: column;
+}
+
+.textArea {
+  padding: 30px;
+  box-sizing: border-box;
+  margin: 20px 0;
+  width: 100%;
+  border-radius: 15px;
+  border: none;
+}
+
+.textArea:active {
+  border: none;
+}
+
+.sendMessageButton {
+  width: 30%;
+  border-radius: 15px;
+  height: 50px;
+  background-color: rgb(95, 91, 91);
+  color: #fff;
+  border: none;
+}
+
+.sendMessageButton_active {
+  cursor: pointer;
+  background-color: #000;
+  transition: scale 0.5s ease-out;
+  scale: 1;
+}
+
+.sendMessageButton_active:hover {
+  scale: 1.05;
+}

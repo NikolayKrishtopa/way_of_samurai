@@ -1,44 +1,60 @@
+const ACTION_TYPES = {
+  ADD_POST: 'ADD-POST',
+  CHANGE_POST_TEXT: 'CHANGE-POST-TEXT',
+  ADD_MESSAGE: 'ADD-MESSAGE',
+  CHANGE_MESSAGE_TEXT: 'CHANGE-MESSAGE-TEXT',
+  CHOOSE_USER: 'CHOOSE-USER',
+}
+
+const addPostActionCreator = () => ({ type: ACTION_TYPES.ADD_POST })
+const changePostTypeActionCreator = (text) => ({
+  type: ACTION_TYPES.CHANGE_POST_TEXT,
+  postText: text,
+})
 const store = {
   _state: {
-    dialogs: [
-      {
-        id: 1,
-        name: 'Алёна',
-        messages: ['Привет!', 'Как поживаешь?', 'Когда домой?', 'Я скучаю'],
-      },
-      {
-        id: 2,
-        name: 'Миша',
-        messages: [
-          'Привет!',
-          'Пойдем бухнём?',
-          'Съедим кебаб?',
-          'Найти разливайку',
-        ],
-      },
-      {
-        id: 3,
-        name: 'Эля',
-        messages: ['Привет!', 'Миша с тобой?', 'У него телефон выключен'],
-      },
-      {
-        id: 4,
-        name: 'Вика',
-        messages: [
-          'Привет, папа!',
-          'А Максим меня укусил!',
-          'Давай поиграем в волка',
-        ],
-      },
-      {
-        id: 5,
-        name: 'Макс',
-        messages: ['Привет, папа!', 'Ам ам', 'Трактор', 'Банан'],
-      },
-      { id: 6, name: 'Женя', messages: ['Привет, дядя Коля!', 'Кошка'] },
-      { id: 7, name: 'Сережа', messages: ['Привет, дядя Коля!', 'Пиво'] },
-      { id: 8, name: 'Мама', messages: ['Привет, сынок!'] },
-    ],
+    conversations: {
+      dialogs: [
+        {
+          id: 1,
+          name: 'Алёна',
+          messages: ['Привет!', 'Как поживаешь?', 'Когда домой?', 'Я скучаю'],
+        },
+        {
+          id: 2,
+          name: 'Миша',
+          messages: [
+            'Привет!',
+            'Пойдем бухнём?',
+            'Съедим кебаб?',
+            'Найти разливайку',
+          ],
+        },
+        {
+          id: 3,
+          name: 'Эля',
+          messages: ['Привет!', 'Миша с тобой?', 'У него телефон выключен'],
+        },
+        {
+          id: 4,
+          name: 'Вика',
+          messages: [
+            'Привет, папа!',
+            'А Максим меня укусил!',
+            'Давай поиграем в волка',
+          ],
+        },
+        {
+          id: 5,
+          name: 'Макс',
+          messages: ['Привет, папа!', 'Ам ам', 'Трактор', 'Банан'],
+        },
+        { id: 6, name: 'Женя', messages: ['Привет, дядя Коля!', 'Кошка'] },
+        { id: 7, name: 'Сережа', messages: ['Привет, дядя Коля!', 'Пиво'] },
+        { id: 8, name: 'Мама', messages: ['Привет, сынок!'] },
+      ],
+      newMessageText: '',
+    },
     profile: {
       posts: [
         { id: 1, text: 'Привет! Мне скучно', likes: 1 },
@@ -83,3 +99,4 @@ const store = {
 }
 
 export default store
+export { addPostActionCreator, changePostTypeActionCreator }
