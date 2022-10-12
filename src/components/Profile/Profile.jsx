@@ -1,20 +1,17 @@
 import avatar from '../../pictures/avatar.jpg'
-import {
-  addPostActionCreator,
-  changePostTypeActionCreator,
-} from '../../redux/store'
+import { actionCreators } from '../../redux/store'
 import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
 
 export default function Profile(props) {
-  const { profile, dispatch } = props
+  const { profilePage, dispatch } = props
 
   function handleAddPost() {
-    dispatch(addPostActionCreator())
+    dispatch(actionCreators.addPost())
   }
 
   function handlePostTextChange(e) {
-    dispatch(changePostTypeActionCreator(e.target.value))
+    dispatch(actionCreators.changePostText(e.target.value))
   }
 
   return (
@@ -48,22 +45,22 @@ export default function Profile(props) {
         <textarea
           placeholder="Add post"
           className={s.textArea}
-          value={profile.newPostText}
+          value={profilePage.newPostText}
           onChange={handlePostTextChange}
         />
         <button
           className={`${s.addPostButton} ${
-            profile.newPostText.length > 0 && s.addPostButton_active
+            profilePage.newPostText.length > 0 && s.addPostButton_active
           }`}
           onClick={handleAddPost}
-          disabled={profile.newPostText.length === 0}
+          disabled={profilePage.newPostText.length === 0}
         >
           Add post
         </button>
       </div>
       <div className={s.myPosts}>
         <h3 className={s.myPostsTitle}>My posts:</h3>
-        {profile.posts.map((e, i) => (
+        {profilePage.posts.map((e, i) => (
           <MyPost postText={e.text} key={e.id} likes={e.likes} />
         ))}
       </div>

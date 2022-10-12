@@ -1,19 +1,34 @@
+import profileReducer from './profileReducer'
+import dialogsReducer from './dialogsReducer'
+
 const ACTION_TYPES = {
   ADD_POST: 'ADD-POST',
   CHANGE_POST_TEXT: 'CHANGE-POST-TEXT',
-  ADD_MESSAGE: 'ADD-MESSAGE',
+  SEND_MESSAGE: 'ADD-MESSAGE',
   CHANGE_MESSAGE_TEXT: 'CHANGE-MESSAGE-TEXT',
   CHOOSE_USER: 'CHOOSE-USER',
 }
 
-const addPostActionCreator = () => ({ type: ACTION_TYPES.ADD_POST })
-const changePostTypeActionCreator = (text) => ({
-  type: ACTION_TYPES.CHANGE_POST_TEXT,
-  postText: text,
-})
+const actionCreators = {
+  addPost: () => ({ type: ACTION_TYPES.ADD_POST }),
+  changePostText: (text) => ({
+    type: ACTION_TYPES.CHANGE_POST_TEXT,
+    postText: text,
+  }),
+  sendMessage: () => ({ type: ACTION_TYPES.SEND_MESSAGE }),
+  changeMessageText: (text) => ({
+    type: ACTION_TYPES.CHANGE_MESSAGE_TEXT,
+    messageText: text,
+  }),
+  chooseUser: (id) => ({
+    type: ACTION_TYPES.CHOOSE_USER,
+    id: id,
+  }),
+}
+
 const store = {
   _state: {
-    conversations: {
+    messagesPage: {
       dialogs: [
         {
           id: 1,
@@ -53,9 +68,10 @@ const store = {
         { id: 7, name: 'Сережа', messages: ['Привет, дядя Коля!', 'Пиво'] },
         { id: 8, name: 'Мама', messages: ['Привет, сынок!'] },
       ],
+      chosenUserId: 1,
       newMessageText: '',
     },
-    profile: {
+    profilePage: {
       posts: [
         { id: 1, text: 'Привет! Мне скучно', likes: 1 },
         { id: 2, text: 'Я пишу соцсеть', likes: 7 },
@@ -69,34 +85,21 @@ const store = {
       newPostText: '',
     },
   },
-  _addPost() {
-    this._state.profile.posts.unshift({
-      text: this._state.profile.newPostText,
-      id: this._state.profile.posts.length + 1,
-      likes: 0,
-    })
-    this._state.profile.newPostText = ''
-    this._renderByState()
-  },
-  _handlePostTextChange(text) {
-    this._state.profile.newPostText = text
-    this._renderByState()
-  },
 
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
-      this._addPost()
-    } else if (action.type === 'CHANGE-POST-TEXT') {
-      this._handlePostTextChange(action.postText)
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
+    this._callSubscriber()
   },
+
   getState() {
     return this._state
   },
+
   subscribe(observer) {
-    this._renderByState = observer
+    this._callSubscriber = observer
   },
 }
 
 export default store
-export { addPostActionCreator, changePostTypeActionCreator }
+export { actionCreators }
