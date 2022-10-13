@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { actionCreators } from '../../../redux/store'
+import actionCreators from '../../../utils/action-creators'
 import s from './Dialog.module.css'
 
 export default function Dialog(props) {

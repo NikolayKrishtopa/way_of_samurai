@@ -1,5 +1,5 @@
 import avatar from '../../pictures/avatar.jpg'
-import { actionCreators } from '../../redux/store'
+import actionCreators from '../../utils/action-creators'
 import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
 

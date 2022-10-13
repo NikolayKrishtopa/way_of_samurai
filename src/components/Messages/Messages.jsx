@@ -1,6 +1,6 @@
 import Dialog from './Dialog/Dialog'
 import Message from './Message/Message'
-import { actionCreators } from '../../redux/store'
+import actionCreators from '../../utils/action-creators'
 import s from './Messages.module.css'
 
 export default function Messages(props) {
