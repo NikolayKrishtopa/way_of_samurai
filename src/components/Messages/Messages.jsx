@@ -1,31 +1,22 @@
 import Dialog from './Dialog/Dialog'
 import Message from './Message/Message'
-import actionCreators from '../../utils/action-creators'
 import s from './Messages.module.css'
 
 export default function Messages(props) {
-  const { messagesPage, dispatch } = props
-  const { dialogs, newMessageText, chosenUserId } = messagesPage
-
-  function handleSendMessage() {
-    dispatch(actionCreators.sendMessage())
-  }
-
-  function handleMessageTextChange(e) {
-    dispatch(actionCreators.changeMessageText(e.target.value))
-  }
-
+  const { messagesPage, onMessageTextChange, onSwitchCompanionId, onSendMessage } = props
+  const { dialogs, newMessageText, chosenCompanionId } = messagesPage
   return (
     <div className={s.messagesSection}>
       <div className={s.dialogs}>
         {dialogs.map((e) => (
-          <Dialog name={e.name} id={e.id} key={e.id} dispatch={dispatch} />
+          <Dialog name={e.name} id={e.id} key={e.id} onSwitchCompanionId={onSwitchCompanionId} />
         ))}
       </div>
       <div className={s.messages}>
         {dialogs
-          .find((e) => e.id === chosenUserId)
+          .find((e) => e.id === chosenCompanionId)
           .messages.map((e, i) => (
+
             <Message messageText={e} key={i} />
           ))}
         <div className={s.sendMessage}>
@@ -33,12 +24,12 @@ export default function Messages(props) {
             placeholder="Tape your message"
             className={s.textArea}
             value={newMessageText}
-            onChange={handleMessageTextChange}
+            onChange={e=>onMessageTextChange(e.target.value)}
             onKeyDown={(e) => {
               if (e.key !== 'Enter') return
               e.preventDefault()
               if (newMessageText.length > 0 && e.key === 'Enter') {
-                handleSendMessage()
+                onSendMessage()
               }
             }}
           />
@@ -46,7 +37,7 @@ export default function Messages(props) {
             className={`${s.sendMessageButton} ${
               newMessageText.length > 0 && s.sendMessageButton_active
             }`}
-            onClick={handleSendMessage}
+            onClick={onSendMessage}
             disabled={messagesPage.newMessageText.length === 0}
           >
             SEND

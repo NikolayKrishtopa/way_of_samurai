@@ -4,16 +4,14 @@ import App from './App'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import store from './redux/store-redux'
+import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
-export default function renderWholeTree() {
-  root.render(
+root.render(
     <BrowserRouter>
-      <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
+      <Provider store={store}>
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
+      </Provider>
     </BrowserRouter>
   )
-}
-
-store.subscribe(renderWholeTree)
-renderWholeTree()

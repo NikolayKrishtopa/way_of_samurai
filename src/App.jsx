@@ -1,15 +1,13 @@
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
-import Messages from './components/Messages/Messages'
+import MessagesContainer from './components/Messages/MessagesContainer'
 import Music from './components/Music/Music'
 import Navbar from './components/Navbar/Navbar'
 import News from './components/News/News'
-import Profile from './components/Profile/Profile'
+import ProfileContainer from './components/Profile/ProfileContainer'
 import Settings from './components/Settings/Settings'
 
 export default function App(props) {
-  const { state, dispatch } = props
-  const { profilePage, messagesPage } = state
   return (
     <div className="page">
       <Header />
@@ -18,12 +16,12 @@ export default function App(props) {
         <Routes>
           <Route
             path="/profile"
-            element={<Profile profilePage={profilePage} dispatch={dispatch} />}
+            element={<ProfileContainer />}
           />
           <Route
             path="/messages/*"
             element={
-              <Messages messagesPage={messagesPage} dispatch={dispatch} />
+              <MessagesContainer />
             }
           />
           <Route path="/news" element={<News />} />

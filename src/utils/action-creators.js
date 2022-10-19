@@ -3,7 +3,7 @@ const ACTION_TYPES = {
   CHANGE_POST_TEXT: 'CHANGE-POST-TEXT',
   SEND_MESSAGE: 'ADD-MESSAGE',
   CHANGE_MESSAGE_TEXT: 'CHANGE-MESSAGE-TEXT',
-  CHOOSE_USER: 'CHOOSE-USER',
+  SWITCH_COMPANION: 'SWITCH-COMPANION',
 }
 
 const actionCreators = {
@@ -17,8 +17,8 @@ const actionCreators = {
     type: ACTION_TYPES.CHANGE_MESSAGE_TEXT,
     messageText: text,
   }),
-  chooseUser: (id) => ({
-    type: ACTION_TYPES.CHOOSE_USER,
+  switchCompanionId: (id) => ({
+    type: ACTION_TYPES.SWITCH_COMPANION,
     id: id,
   }),
 }

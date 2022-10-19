@@ -1,18 +1,9 @@
 import avatar from '../../pictures/avatar.jpg'
-import actionCreators from '../../utils/action-creators'
 import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
 
 export default function Profile(props) {
-  const { profilePage, dispatch } = props
-
-  function handleAddPost() {
-    dispatch(actionCreators.addPost())
-  }
-
-  function handlePostTextChange(e) {
-    dispatch(actionCreators.changePostText(e.target.value))
-  }
+  const { profilePage, onAddPost, onPostTextChange } = props
 
   return (
     <div className={s.profile}>
@@ -46,13 +37,13 @@ export default function Profile(props) {
           placeholder="Add post"
           className={s.textArea}
           value={profilePage.newPostText}
-          onChange={handlePostTextChange}
+          onChange={e=>onPostTextChange(e.target.value)}
         />
         <button
           className={`${s.addPostButton} ${
             profilePage.newPostText.length > 0 && s.addPostButton_active
           }`}
-          onClick={handleAddPost}
+          onClick={onAddPost}
           disabled={profilePage.newPostText.length === 0}
         >
           Add post
