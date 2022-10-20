@@ -19,6 +19,9 @@ export default function Navbar() {
       <NavLink to="/settings" className={`${s.navbarItem} navbarItem`}>
         Настройки
       </NavLink>
+      <NavLink to="/users" className={`${s.navbarItem} navbarItem`}>
+        Пользователи
+      </NavLink>
     </div>
   )
 }

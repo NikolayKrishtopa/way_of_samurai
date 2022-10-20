@@ -6,6 +6,7 @@ import Navbar from './components/Navbar/Navbar'
 import News from './components/News/News'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import Settings from './components/Settings/Settings'
+import UsersContainer from './components/Users/UsersContainer'
 
 export default function App(props) {
   return (
@@ -27,6 +28,7 @@ export default function App(props) {
           <Route path="/news" element={<News />} />
           <Route path="/music" element={<Music />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/users" element={<UsersContainer />} />
         </Routes>
       </div>
     </div>

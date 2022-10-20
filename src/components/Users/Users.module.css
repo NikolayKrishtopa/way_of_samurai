@@ -1,0 +1,39 @@
+.users {
+  padding: 0 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.showMoreUsersButton {
+  border: none;
+  background-color: aquamarine;
+  padding: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.showMoreUsersButton_disabled {
+  background-color: transparent;
+  background-color: rgb(193, 184, 184);
+}
+
+.showOnlyFriendsButton {
+  width: 200px;
+  border: none;
+  background-color: rgb(193, 184, 184);
+  padding: 5px;
+  cursor: pointer;
+}
+
+.showOnlyFriendsButton_active {
+  background-color: aquamarine;
+}
+
+.searchLine {
+  padding: 3px;
+}
+
+.usersNavbar {
+  display: grid;
+  grid-template-columns: 200px 200px 1fr;
+}

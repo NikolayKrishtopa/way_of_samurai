@@ -1,0 +1,45 @@
+.user {
+  margin-bottom: 20px;
+  display: flex;
+  border: lime 2px solid;
+  border-radius: 20px;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.avatar {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.userInfo {
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+}
+
+.userLocation {
+}
+
+.userAbout {
+}
+
+.button {
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.follow {
+  background-color: greenyellow;
+}
+
+.unFollow {
+  background-color: red;
+}
