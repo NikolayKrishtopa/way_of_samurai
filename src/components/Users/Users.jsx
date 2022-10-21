@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import User from './User/User'
 import s from './Users.module.css'
 
@@ -11,26 +10,9 @@ export default function Users(props) {
     onShowOnlyFriends,
     onChangeUserSearchText,
     onSubmitUserSearch,
-    setUsers,
   } = props
 
   // const buttonExtendDisabled = usersPage.usersShownPerPage >= usersArraySorted.length
-
-  useEffect(() => {
-    fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?term=${usersPage.userSearch}&friend=${usersPage.showOnlyFriends}`
-    )
-      .then((res) => res.json())
-      .then((res) => setUsers(res.items))
-  }, [usersPage.userSearch, usersPage.showOnlyFriends])
-
-  useEffect(() => {
-    fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?page=${usersPage.page}&term=${usersPage.userSearch}&friend=${usersPage.showOnlyFriends}`
-    )
-      .then((res) => res.json())
-      .then((res) => setUsers([...usersPage.users, ...res.items]))
-  }, [usersPage.page])
 
   return (
     <>
