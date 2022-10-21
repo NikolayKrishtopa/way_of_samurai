@@ -8,13 +8,9 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onAddPost: () => dispatch(actionCreators.addPost()),
-    onPostTextChange: text => dispatch(actionCreators.changePostText(text))
-  }
-}
-
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
+const ProfileContainer = connect(mapStateToProps, {
+  onAddPost: actionCreators.addPost,
+  onPostTextChange: actionCreators.changePostText,
+})(Profile)
 
 export default ProfileContainer

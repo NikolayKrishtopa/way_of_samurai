@@ -9,7 +9,9 @@ const ACTION_TYPES = {
   CHANGE_SHOW_USERS_MODE: 'CHANGE-SHOW-USERS-MODE',
   SHOW_ALL_USERS: 'SHOW-ALL-USERS',
   SHOW_ONLY_FRIENDS: 'SHOW-ONLY-FRIENDS',
-  CHANGE_USER_SEARCH_TEXT: 'CHANGE-USER-SEARCH-TEXT'
+  CHANGE_USER_SEARCH_TEXT: 'CHANGE-USER-SEARCH-TEXT',
+  SET_USERS: 'SET_USERS',
+  SUBMIT_USER_SEARCH: 'SUBMIT-USER-SEARCH'
 }
 
 const actionCreators = {
@@ -46,6 +48,13 @@ const actionCreators = {
   changeUserSearchText: (text) => ({
     type: ACTION_TYPES.CHANGE_USER_SEARCH_TEXT,
     text: text
+  }),
+  submitUserSearch: () => ({
+    type: ACTION_TYPES.SUBMIT_USER_SEARCH,
+  }),
+  setUsers: (users) => ({
+    type: ACTION_TYPES.SET_USERS,
+    users
   })
 }
 export default actionCreators
