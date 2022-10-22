@@ -11,7 +11,8 @@ const ACTION_TYPES = {
   SHOW_ONLY_FRIENDS: 'SHOW-ONLY-FRIENDS',
   CHANGE_USER_SEARCH_TEXT: 'CHANGE-USER-SEARCH-TEXT',
   SET_USERS: 'SET_USERS',
-  SUBMIT_USER_SEARCH: 'SUBMIT-USER-SEARCH'
+  SUBMIT_USER_SEARCH: 'SUBMIT-USER-SEARCH',
+  SET_IS_LOADING: 'SET-IS-LOADING',
 }
 
 const actionCreators = {
@@ -31,32 +32,36 @@ const actionCreators = {
   }),
   followUser: (id) => ({
     type: ACTION_TYPES.FOLLOW_USER,
-    id: id
+    id: id,
   }),
   extendUsersList: () => ({
-    type: ACTION_TYPES.EXTEND_USERS_LIST
+    type: ACTION_TYPES.EXTEND_USERS_LIST,
   }),
   changeUserShowMode: () => ({
-    type:ACTION_TYPES.CHANGE_SHOW_USERS_MODE
+    type: ACTION_TYPES.CHANGE_SHOW_USERS_MODE,
   }),
   showAllUsers: () => ({
-    type:ACTION_TYPES.SHOW_ALL_USERS
+    type: ACTION_TYPES.SHOW_ALL_USERS,
   }),
   showOnlyFriends: () => ({
-    type:ACTION_TYPES.SHOW_ONLY_FRIENDS
+    type: ACTION_TYPES.SHOW_ONLY_FRIENDS,
   }),
   changeUserSearchText: (text) => ({
     type: ACTION_TYPES.CHANGE_USER_SEARCH_TEXT,
-    text: text
+    text: text,
   }),
   submitUserSearch: () => ({
     type: ACTION_TYPES.SUBMIT_USER_SEARCH,
   }),
   setUsers: (users) => ({
     type: ACTION_TYPES.SET_USERS,
-    users
-  })
+    users,
+  }),
+  setIsLoading: (isLoading) => ({
+    type: ACTION_TYPES.SET_IS_LOADING,
+    isLoading,
+  }),
 }
 export default actionCreators
 
-export {ACTION_TYPES}
+export { ACTION_TYPES }

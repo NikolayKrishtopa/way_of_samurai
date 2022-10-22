@@ -1,3 +1,4 @@
+import PopupLoading from '../PopupLoading/PopupLoading'
 import User from './User/User'
 import s from './Users.module.css'
 
@@ -55,5 +56,6 @@ export default function Users(props) {
         Показать еще
       </button>
     </>
+    // <PopupLoading />
   )
 }
