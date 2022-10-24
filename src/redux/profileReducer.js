@@ -32,6 +32,6 @@ export default function profileReducer(state = initialState, action) {
       stateCopy.newPostText = action.postText
       return stateCopy
     default:
-      return stateCopy
+      return state
   }
 }

@@ -1,9 +1,10 @@
 .header {
-  padding-left: 30px;
-  background-color: #ececec;
-  color: #6c757d;
+  padding: 0 30px;
+  background-color: #061638;
+  color: #7aafde;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   grid-area: h;
 }
 
@@ -12,7 +13,27 @@
   width: 50px;
 }
 
-.logoReversed {
-  margin-left: 30px;
+.logo_style_reversed {
+  margin: 0 20px 0 10px;
   transform: scale(-1, 1);
+}
+
+.header__text {
+  font-size: 2rem;
+}
+
+.header__text_type_author {
+  font-size: 1rem;
+}
+
+.header__logoBlock {
+  display: flex;
+}
+
+.authBlock {
+  justify-self: flex-end;
+}
+
+.header__link {
+  color: #7aafde;
 }

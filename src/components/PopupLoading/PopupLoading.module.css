@@ -2,6 +2,7 @@
   padding: 0;
   position: fixed;
   display: flex;
+  flex-direction: column;
   top: 0;
   left: 0;
   right: 0;
@@ -14,6 +15,12 @@
 }
 
 .popup__spinner {
-  width: 100px;
-  height: 100px;
+  width: auto;
+  height: 300px;
+}
+
+.popup__text {
+  color: aquamarine;
+  font-size: 30px;
+  text-transform: uppercase;
 }

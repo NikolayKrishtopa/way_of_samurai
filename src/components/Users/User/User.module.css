@@ -1,12 +1,18 @@
+.userLink {
+  text-decoration: none;
+}
+
 .user {
   margin-bottom: 20px;
   display: grid;
   border: lime 2px solid;
   border-radius: 20px;
   margin: 20px 0;
+  color: black;
   padding: 10px;
   max-width: 100%;
   grid-template-columns: 100px 1fr;
+  cursor: pointer;
 }
 
 .avatar {
@@ -14,6 +20,11 @@
   width: 100px;
   object-fit: cover;
   border-radius: 50%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
 }
 
 .userInfo {
@@ -41,6 +52,12 @@
   cursor: pointer;
   border-radius: 10px;
   max-width: 200px;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.button:hover {
+  opacity: 0.6;
 }
 
 .follow {

@@ -1,10 +1,11 @@
+import { NavLink } from 'react-router-dom'
 import s from './User.module.css'
 
 export default function User(props) {
   const { user, onFollowUser } = props
   return (
-    <>
-      <div className={s.user}>
+    <div className={s.user}>
+      <NavLink to={`profile/${user.id}`} className={s.userLink}>
         <img
           src={
             user.photos.small
@@ -14,27 +15,25 @@ export default function User(props) {
           alt="Аватар пользователя"
           className={s.avatar}
         />
-        <div className={s.userInfo}>
-          <h3 className={s.userName}>{user.name}</h3>
-          <p className={s.userStatus}>
-            {user.status ? user.status : 'Статус не указан'}
-          </p>
-          <p className={s.userLocation}>
-            {user.location ? user.location.country : 'N/A'},{' '}
-            {user.location ? user.location.city : 'N/A'}
-          </p>
-          <p className={s.userAbout}>{user.about}</p>
+      </NavLink>
+      <div className={s.userInfo}>
+        <h3 className={s.userName}>{user.name}</h3>
+        <p className={s.userStatus}>
+          {user.status ? user.status : 'Статус не указан'}
+        </p>
+        <p className={s.userLocation}>
+          {user.location ? user.location.country : 'N/A'},{' '}
+          {user.location ? user.location.city : 'N/A'}
+        </p>
+        <p className={s.userAbout}>{user.about}</p>
 
-          <button
-            className={`${s.button} ${
-              !user.isFollowed ? s.follow : s.unFollow
-            }`}
-            onClick={() => onFollowUser(user.id)}
-          >
-            {user.isFollowed ? 'Удалить из друзей' : 'Добавить в друзья'}
-          </button>
-        </div>
+        <button
+          className={`${s.button} ${!user.isFollowed ? s.follow : s.unFollow}`}
+          onClick={() => onFollowUser(user.id)}
+        >
+          {user.isFollowed ? 'Удалить из друзей' : 'Добавить в друзья'}
+        </button>
       </div>
-    </>
+    </div>
   )
 }

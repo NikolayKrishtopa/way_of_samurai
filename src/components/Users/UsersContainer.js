@@ -43,7 +43,7 @@ function UsersContainer(props) {
       .then((res) => setUsers([...usersPage.users, ...res.items]))
       .catch((err) => console.log(console.log(err)))
       .finally(() => {
-        // setIsLoading(false)
+        setIsLoading(false)
       })
   }, [usersPage.page])
 

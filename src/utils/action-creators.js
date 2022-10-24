@@ -13,6 +13,7 @@ const ACTION_TYPES = {
   SET_USERS: 'SET_USERS',
   SUBMIT_USER_SEARCH: 'SUBMIT-USER-SEARCH',
   SET_IS_LOADING: 'SET-IS-LOADING',
+  SET_USER: 'SET-USER',
 }
 
 const actionCreators = {
@@ -60,6 +61,10 @@ const actionCreators = {
   setIsLoading: (isLoading) => ({
     type: ACTION_TYPES.SET_IS_LOADING,
     isLoading,
+  }),
+  setUser: (user) => ({
+    type: ACTION_TYPES.SET_USER,
+    user,
   }),
 }
 export default actionCreators
