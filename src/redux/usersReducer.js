@@ -13,7 +13,7 @@ let initialState = {
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
     case ACTION_TYPES.SET_USERS: {
-      const stateCopy = { ...state, users: [...action.users] }
+      const stateCopy = { ...state, users: action.users }
       return stateCopy
     }
     case ACTION_TYPES.FOLLOW_USER: {
@@ -23,8 +23,17 @@ export default function usersReducer(state = initialState, action) {
           e.id === action.id ? { ...e } : e
         ),
       }
-      stateCopy.users.find((e) => e.id === action.id).isFollowed =
-        !stateCopy.users.find((e) => e.id === action.id).isFollowed
+      stateCopy.users.find((e) => e.id === action.id).followed = true
+      return stateCopy
+    }
+    case ACTION_TYPES.UNFOLLOW_USER: {
+      const stateCopy = {
+        ...state,
+        users: [...state.users].filter((e) =>
+          e.id === action.id ? { ...e } : e
+        ),
+      }
+      stateCopy.users.find((e) => e.id === action.id).followed = false
       return stateCopy
     }
     case ACTION_TYPES.EXTEND_USERS_LIST: {

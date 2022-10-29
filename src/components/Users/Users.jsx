@@ -1,4 +1,3 @@
-import PopupLoading from '../PopupLoading/PopupLoading'
 import User from './User/User'
 import s from './Users.module.css'
 
@@ -6,6 +5,7 @@ export default function Users(props) {
   const {
     usersPage,
     onFollowUser,
+    onUnfollowUser,
     onExtendUsersList,
     onShowAllUsers,
     onShowOnlyFriends,
@@ -45,7 +45,12 @@ export default function Users(props) {
       </div>
       <div className={s.users}>
         {usersPage.users.map((e) => (
-          <User key={e.id} user={e} onFollowUser={onFollowUser} />
+          <User
+            key={e.id}
+            user={e}
+            onFollowUser={onFollowUser}
+            onUnfollowUser={onUnfollowUser}
+          />
         ))}
       </div>
       <button

@@ -5,6 +5,7 @@ const ACTION_TYPES = {
   CHANGE_MESSAGE_TEXT: 'CHANGE-MESSAGE-TEXT',
   SWITCH_COMPANION: 'SWITCH-COMPANION',
   FOLLOW_USER: 'FOLLOW-USER',
+  UNFOLLOW_USER: 'UNFOLLOW-USER',
   EXTEND_USERS_LIST: 'EXTEND-USERS-LIST',
   CHANGE_SHOW_USERS_MODE: 'CHANGE-SHOW-USERS-MODE',
   SHOW_ALL_USERS: 'SHOW-ALL-USERS',
@@ -33,7 +34,11 @@ const actionCreators = {
   }),
   followUser: (id) => ({
     type: ACTION_TYPES.FOLLOW_USER,
-    id: id,
+    id,
+  }),
+  unfollowUser: (id) => ({
+    type: ACTION_TYPES.UNFOLLOW_USER,
+    id,
   }),
   extendUsersList: () => ({
     type: ACTION_TYPES.EXTEND_USERS_LIST,

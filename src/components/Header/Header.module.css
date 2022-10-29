@@ -36,4 +36,10 @@
 
 .header__link {
   color: #7aafde;
+  cursor: pointer;
+}
+
+.header__loginBlock {
+  display: flex;
+  gap: 20px;
 }

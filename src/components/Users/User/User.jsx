@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import s from './User.module.css'
 
 export default function User(props) {
-  const { user, onFollowUser } = props
+  const { user, onFollowUser, onUnfollowUser } = props
   return (
     <div className={s.user}>
       <NavLink to={`profile/${user.id}`} className={s.userLink}>
@@ -28,10 +28,16 @@ export default function User(props) {
         <p className={s.userAbout}>{user.about}</p>
 
         <button
-          className={`${s.button} ${!user.isFollowed ? s.follow : s.unFollow}`}
-          onClick={() => onFollowUser(user.id)}
+          className={`${s.button} ${!user.followed ? s.follow : s.unFollow}`}
+          onClick={() => {
+            if (user.followed) {
+              onUnfollowUser(user.id)
+            } else {
+              onFollowUser(user.id)
+            }
+          }}
         >
-          {user.isFollowed ? 'Удалить из друзей' : 'Добавить в друзья'}
+          {user.followed ? 'Удалить из друзей' : 'Добавить в друзья'}
         </button>
       </div>
     </div>

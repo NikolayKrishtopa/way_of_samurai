@@ -12,6 +12,7 @@ function UsersContainer(props) {
   const {
     usersPage,
     onFollowUser,
+    onUnfollowUser,
     onExtendUsersList,
     onShowAllUsers,
     onShowOnlyFriends,
@@ -24,7 +25,7 @@ function UsersContainer(props) {
   useEffect(() => {
     setIsLoading(true)
     fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?term=${usersPage.userSearch}&friend=${usersPage.showOnlyFriends}`
+      `https://social-network.samuraijs.com/api/1.0/users?friend=${usersPage.showOnlyFriends}&term=${usersPage.userSearch}`
     )
       .then((res) => res.json())
       .then((res) => setUsers(res.items))
@@ -34,25 +35,69 @@ function UsersContainer(props) {
       })
   }, [usersPage.userSearch, usersPage.showOnlyFriends])
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   setIsLoading(true)
+  //   fetch(
+  //     `https://social-network.samuraijs.com/api/1.0/users?page=${usersPage.page}&term=${usersPage.userSearch}&friend=${usersPage.showOnlyFriends}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((res) => setUsers([...usersPage.users, ...res.items]))
+  //     .catch((err) => console.log(console.log(err)))
+  //     .finally(() => {
+  //       setIsLoading(false)
+  //     })
+  // }, [usersPage.page])
+
+  function handleFollowUser(id) {
     setIsLoading(true)
-    fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?page=${usersPage.page}&term=${usersPage.userSearch}&friend=${usersPage.showOnlyFriends}`
-    )
+    fetch(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
+      method: 'POST',
+      credentials: 'include',
+    })
       .then((res) => res.json())
-      .then((res) => setUsers([...usersPage.users, ...res.items]))
-      .catch((err) => console.log(console.log(err)))
+      .then((res) => {
+        console.log(res)
+        if (res.resultCode === 0) {
+          onFollowUser(id)
+          return
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
       .finally(() => {
         setIsLoading(false)
       })
-  }, [usersPage.page])
+  }
+
+  function handleUnfollowUser(id) {
+    setIsLoading(true)
+    fetch(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.resultCode === 0) {
+          onUnfollowUser(id)
+          return
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }
 
   return (
     <>
       {usersPage.isLoading && <PopupLoading />}
       <Users
         usersPage={usersPage}
-        onFollowUser={onFollowUser}
+        onFollowUser={handleFollowUser}
+        onUnfollowUser={handleUnfollowUser}
         onExtendUsersList={onExtendUsersList}
         onShowAllUsers={onShowAllUsers}
         onShowOnlyFriends={onShowOnlyFriends}
@@ -65,6 +110,7 @@ function UsersContainer(props) {
 
 export default connect(mapStateToProps, {
   onFollowUser: actionCreators.followUser,
+  onUnfollowUser: actionCreators.unfollowUser,
   onExtendUsersList: actionCreators.extendUsersList,
   onShowAllUsers: actionCreators.showAllUsers,
   onShowOnlyFriends: actionCreators.showOnlyFriends,

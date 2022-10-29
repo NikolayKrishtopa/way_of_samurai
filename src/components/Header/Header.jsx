@@ -26,12 +26,12 @@ export default function Header(props) {
             Войти
           </NavLink>
         ) : (
-          <>
+          <div className={s.header__loginBlock}>
             <p className={s.header__link}>{auth.user.login}</p>
             <p className={s.header__link} onClick={onLogOut}>
               Выйти
             </p>
-          </>
+          </div>
         )}
       </div>
     </div>
