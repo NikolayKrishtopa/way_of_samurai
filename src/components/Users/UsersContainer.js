@@ -25,7 +25,17 @@ function UsersContainer(props) {
   useEffect(() => {
     setIsLoading(true)
     fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?friend=${usersPage.showOnlyFriends}&term=${usersPage.userSearch}`
+      `https://social-network.samuraijs.com/api/1.0/users?${
+        usersPage.showOnlyFriends ? `friend=${usersPage.showOnlyFriends}&` : ''
+      }term=${usersPage.userSearch}`,
+      {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'API-KEY': '06fa1e34-2eda-4911-ba6d-106750cf7c2d',
+        },
+      }
     )
       .then((res) => res.json())
       .then((res) => setUsers(res.items))
@@ -35,24 +45,33 @@ function UsersContainer(props) {
       })
   }, [usersPage.userSearch, usersPage.showOnlyFriends])
 
-  // useEffect(() => {
-  //   setIsLoading(true)
-  //   fetch(
-  //     `https://social-network.samuraijs.com/api/1.0/users?page=${usersPage.page}&term=${usersPage.userSearch}&friend=${usersPage.showOnlyFriends}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((res) => setUsers([...usersPage.users, ...res.items]))
-  //     .catch((err) => console.log(console.log(err)))
-  //     .finally(() => {
-  //       setIsLoading(false)
-  //     })
-  // }, [usersPage.page])
+  useEffect(() => {
+    setIsLoading(true)
+    fetch(
+      `https://social-network.samuraijs.com/api/1.0/users?page=${usersPage.page}&term=${usersPage.userSearch}&friend=${usersPage.showOnlyFriends}`
+    )
+      .then((res) => res.json())
+      .then((res) =>
+        setUsers([
+          ...usersPage.users,
+          ...res.items.filter((e) => !usersPage.users.includes(e)),
+        ])
+      )
+      .catch((err) => console.log(console.log(err)))
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, [usersPage.page])
 
   function handleFollowUser(id) {
     setIsLoading(true)
     fetch(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
       method: 'POST',
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'API-KEY': '06fa1e34-2eda-4911-ba6d-106750cf7c2d',
+      },
     })
       .then((res) => res.json())
       .then((res) => {
@@ -75,9 +94,14 @@ function UsersContainer(props) {
     fetch(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
       method: 'DELETE',
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'API-KEY': '06fa1e34-2eda-4911-ba6d-106750cf7c2d',
+      },
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res)
         if (res.resultCode === 0) {
           onUnfollowUser(id)
           return

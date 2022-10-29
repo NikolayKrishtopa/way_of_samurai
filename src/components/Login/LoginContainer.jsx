@@ -4,7 +4,7 @@ import actionCreators from '../../utils/action-creators'
 import Login from './Login'
 
 function LoginContainer(props) {
-  const { setIsLoading, setUser, auth } = props
+  const { setIsLoading, setUser } = props
   const navigate = useNavigate()
   function onSubmit(values) {
     setIsLoading(true)
@@ -18,8 +18,12 @@ function LoginContainer(props) {
     })
       .then((res) => res.json())
       .then((res) => {
-        navigate('/login')
-        setUser(res.data)
+        if (res.resultCode === 0) {
+          setUser(res.data)
+          navigate('/profile')
+        } else {
+          navigate('/login')
+        }
       })
       .catch((err) => {
         console.log(err)

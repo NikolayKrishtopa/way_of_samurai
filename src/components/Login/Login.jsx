@@ -10,7 +10,6 @@ export default function Login(props) {
   function handleSubmitForm(e) {
     e.preventDefault()
     onSubmit(values)
-    // console.log(values)
     resetForm()
   }
 

@@ -13,7 +13,11 @@ function HeaderContainer(props) {
   useEffect(() => {
     setIsLoading(true)
     fetch(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+      method: 'GET',
       credentials: 'include',
+      headers: {
+        'API-KEY': '06fa1e34-2eda-4911-ba6d-106750cf7c2d',
+      },
     })
       .then((res) => res.json())
       .then((res) => {
