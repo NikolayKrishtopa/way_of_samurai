@@ -49,6 +49,9 @@ export default function Users(props) {
             user={e}
             onFollowUser={onFollowUser}
             onUnfollowUser={onUnfollowUser}
+            followingInProgress={usersPage.followingInProcessList.some((u) => {
+              return e.id === u
+            })}
           />
         ))}
       </div>

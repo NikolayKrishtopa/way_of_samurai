@@ -67,3 +67,11 @@
 .unFollow {
   background-color: red;
 }
+
+.disabled {
+  background-color: rgb(193, 184, 184);
+}
+
+.disabled:hover {
+  opacity: 1;
+}

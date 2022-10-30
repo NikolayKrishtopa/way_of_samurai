@@ -2,24 +2,19 @@ import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import actionCreators from '../../utils/action-creators'
 import Login from './Login'
+import { authApi } from '../../api/api'
 
 function LoginContainer(props) {
   const { setIsLoading, setUser } = props
   const navigate = useNavigate()
+
   function onSubmit(values) {
     setIsLoading(true)
-    fetch(`https://social-network.samuraijs.com/api/1.0/auth/login`, {
-      credentials: 'include',
-      method: 'POST',
-      body: JSON.stringify(values),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
+    authApi
+      .login(values)
       .then((res) => {
-        if (res.resultCode === 0) {
-          setUser(res.data)
+        if (res.data.resultCode === 0) {
+          setUser(res.data.data)
           navigate('/profile')
         } else {
           navigate('/login')

@@ -23,3 +23,10 @@
   opacity: 50%;
   background-color: #fff;
 }
+
+@media (max-width: 900px) {
+  .navbar {
+    display: none;
+    pointer-events: none;
+  }
+}

@@ -27,6 +27,7 @@
 }
 
 .header__logoBlock {
+  align-items: center;
   display: flex;
 }
 
@@ -42,4 +43,19 @@
 .header__loginBlock {
   display: flex;
   gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .header__loginBlock {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .header__text {
+    font-size: 1.5rem;
+  }
+
+  .header__text_type_author {
+    font-size: 0.7rem;
+  }
 }

@@ -8,6 +8,7 @@ let initialState = {
   searchUserTextValue: '',
   userSearch: '',
   isLoading: false,
+  followingInProcessList: [],
 }
 
 export default function usersReducer(state = initialState, action) {
@@ -36,7 +37,7 @@ export default function usersReducer(state = initialState, action) {
       stateCopy.users.find((e) => e.id === action.id).followed = false
       return stateCopy
     }
-    case ACTION_TYPES.SET_PAGE: {
+    case ACTION_TYPES.SET_USERS_PAGE: {
       const stateCopy = { ...state }
       stateCopy.page = action.page
       return stateCopy
@@ -62,6 +63,22 @@ export default function usersReducer(state = initialState, action) {
     }
     case ACTION_TYPES.SET_IS_LOADING: {
       const stateCopy = { ...state, isLoading: action.isLoading }
+      return stateCopy
+    }
+    case ACTION_TYPES.START_FOLLOWING_REQ: {
+      const stateCopy = {
+        ...state,
+        followingInProcessList: [...state.followingInProcessList, action.id],
+      }
+      return stateCopy
+    }
+    case ACTION_TYPES.FINISH_FOLLOWING_REQ: {
+      const stateCopy = {
+        ...state,
+        followingInProcessList: state.followingInProcessList.filter(
+          (e) => e !== action.id
+        ),
+      }
       return stateCopy
     }
     default:

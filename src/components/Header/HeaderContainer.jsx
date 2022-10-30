@@ -4,6 +4,7 @@ import actionCreators from '../../utils/action-creators'
 import Header from './Header'
 import { useNavigate } from 'react-router-dom'
 import PopupLoading from '../PopupLoading/PopupLoading'
+import { authApi } from '../../api/api'
 
 function HeaderContainer(props) {
   const { auth, setIsLoading, setUser } = props
@@ -12,20 +13,14 @@ function HeaderContainer(props) {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'API-KEY': '06fa1e34-2eda-4911-ba6d-106750cf7c2d',
-      },
-    })
-      .then((res) => res.json())
+    authApi
+      .checkAuth()
       .then((res) => {
-        if (res.resultCode === 1) {
+        if (res.data.resultCode === 1) {
           navigate('/login')
           return
         }
-        setUser(res.data)
+        setUser(res.data.data)
         navigate('/profile')
       })
       .catch((err) => {
@@ -38,16 +33,10 @@ function HeaderContainer(props) {
 
   function handleLogOut() {
     setIsLoading(true)
-    fetch(`https://social-network.samuraijs.com/api/1.0/auth/login`, {
-      credentials: 'include',
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
+    authApi
+      .logout()
       .then((res) => {
-        if (res.resultCode === 0) {
+        if (res.data.resultCode === 0) {
           setUser({})
           navigate('/login')
         }

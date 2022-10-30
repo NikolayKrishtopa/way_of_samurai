@@ -5,10 +5,6 @@ import { connect } from 'react-redux'
 import PopupLoading from '../PopupLoading/PopupLoading'
 import { usersApi } from '../../api/api'
 
-function mapStateToProps(state) {
-  return { usersPage: state.usersPage }
-}
-
 function UsersContainer(props) {
   const {
     usersPage,
@@ -21,6 +17,8 @@ function UsersContainer(props) {
     onSubmitUserSearch,
     setUsers,
     setIsLoading,
+    startFollowingReq,
+    finishFollowingReq,
   } = props
 
   const [isExtendButtonDisabled, setIsExtendButtonDisabled] = useState(false)
@@ -66,7 +64,7 @@ function UsersContainer(props) {
   }, [usersPage.page])
 
   function handleFollowUser(id) {
-    setIsLoading(true)
+    startFollowingReq(id)
     usersApi
       .followUser(id)
       .then((res) => {
@@ -80,12 +78,12 @@ function UsersContainer(props) {
         console.log(err)
       })
       .finally(() => {
-        setIsLoading(false)
+        finishFollowingReq(id)
       })
   }
 
   function handleUnfollowUser(id) {
-    setIsLoading(true)
+    startFollowingReq(id)
     usersApi
       .unfollowUser(id)
       .then((res) => {
@@ -99,7 +97,7 @@ function UsersContainer(props) {
         console.log(err)
       })
       .finally(() => {
-        setIsLoading(false)
+        finishFollowingReq(id)
       })
   }
 
@@ -121,6 +119,10 @@ function UsersContainer(props) {
   )
 }
 
+function mapStateToProps(state) {
+  return { usersPage: state.usersPage }
+}
+
 export default connect(mapStateToProps, {
   onFollowUser: actionCreators.followUser,
   onUnfollowUser: actionCreators.unfollowUser,
@@ -131,4 +133,6 @@ export default connect(mapStateToProps, {
   onSubmitUserSearch: actionCreators.submitUserSearch,
   setUsers: actionCreators.setUsers,
   setIsLoading: actionCreators.setIsLoading,
+  startFollowingReq: actionCreators.startFollowingReq,
+  finishFollowingReq: actionCreators.finishFollowingReq,
 })(UsersContainer)
