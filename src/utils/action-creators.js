@@ -6,7 +6,7 @@ const ACTION_TYPES = {
   SWITCH_COMPANION: 'SWITCH-COMPANION',
   FOLLOW_USER: 'FOLLOW-USER',
   UNFOLLOW_USER: 'UNFOLLOW-USER',
-  EXTEND_USERS_LIST: 'EXTEND-USERS-LIST',
+  SET_PAGE: 'SET-PAGE',
   CHANGE_SHOW_USERS_MODE: 'CHANGE-SHOW-USERS-MODE',
   SHOW_ALL_USERS: 'SHOW-ALL-USERS',
   SHOW_ONLY_FRIENDS: 'SHOW-ONLY-FRIENDS',
@@ -40,8 +40,9 @@ const actionCreators = {
     type: ACTION_TYPES.UNFOLLOW_USER,
     id,
   }),
-  extendUsersList: () => ({
-    type: ACTION_TYPES.EXTEND_USERS_LIST,
+  setPage: (page) => ({
+    type: ACTION_TYPES.SET_PAGE,
+    page,
   }),
   changeUserShowMode: () => ({
     type: ACTION_TYPES.CHANGE_SHOW_USERS_MODE,

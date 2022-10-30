@@ -13,8 +13,7 @@
   cursor: pointer;
 }
 
-.showMoreUsersButton_disabled {
-  background-color: transparent;
+.button_disabled {
   background-color: rgb(193, 184, 184);
 }
 

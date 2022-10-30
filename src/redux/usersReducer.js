@@ -36,9 +36,9 @@ export default function usersReducer(state = initialState, action) {
       stateCopy.users.find((e) => e.id === action.id).followed = false
       return stateCopy
     }
-    case ACTION_TYPES.EXTEND_USERS_LIST: {
+    case ACTION_TYPES.SET_PAGE: {
       const stateCopy = { ...state }
-      stateCopy.page += 1
+      stateCopy.page = action.page
       return stateCopy
     }
     case ACTION_TYPES.SHOW_ALL_USERS: {

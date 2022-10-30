@@ -6,14 +6,13 @@ export default function Users(props) {
     usersPage,
     onFollowUser,
     onUnfollowUser,
-    onExtendUsersList,
+    onSetPage,
     onShowAllUsers,
     onShowOnlyFriends,
     onChangeUserSearchText,
     onSubmitUserSearch,
+    isExtendButtonDisabled,
   } = props
-
-  // const buttonExtendDisabled = usersPage.usersShownPerPage >= usersArraySorted.length
 
   return (
     <>
@@ -54,13 +53,14 @@ export default function Users(props) {
         ))}
       </div>
       <button
-        className={`${s.showMoreUsersButton}`}
-        onClick={onExtendUsersList}
-        // disabled={buttonExtendDisabled}
+        className={`${s.showMoreUsersButton} ${
+          isExtendButtonDisabled && s.button_disabled
+        }`}
+        onClick={() => onSetPage(usersPage.page + 1)}
+        disabled={isExtendButtonDisabled}
       >
         Показать еще
       </button>
     </>
-    // <PopupLoading />
   )
 }
