@@ -2,7 +2,15 @@ import { ACTION_TYPES } from '../utils/action-creators'
 import actionCreators from '../utils/action-creators'
 import { usersApi } from '../api/api'
 
-const { setIsLoading, setPage, setUsers, setTotalUsersQty } = actionCreators
+const {
+  setIsLoading,
+  setUsers,
+  setTotalUsersQty,
+  startFollowingReq,
+  finishFollowingReq,
+  followUser,
+  unfollowUser,
+} = actionCreators
 
 const initialState = {
   users: [],
@@ -124,12 +132,39 @@ export const getUsers =
       })
   }
 
-export const followUser = (id) => (dispatch) {
-    
-  }
+export const doFollowUser = (id) => (dispatch) => {
+  dispatch(startFollowingReq(id))
+  usersApi
+    .followUser(id)
+    .then((res) => {
+      if (res.data.resultCode === 0) {
+        dispatch(followUser(id))
+        return
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      dispatch(finishFollowingReq(id))
+    })
+}
 
-  export const unfollowUser = (id) => (dispatch) {
-    
-  }
-
-  
+export const doUnfollowUser = (id, users) => (dispatch) => {
+  dispatch(startFollowingReq(id))
+  usersApi
+    .unfollowUser(id)
+    .then((res) => {
+      if (res.data.resultCode === 0) {
+        dispatch(unfollowUser(id))
+        dispatch(setUsers(users.filter((e) => e.id !== id)))
+        return
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      dispatch(finishFollowingReq(id))
+    })
+}
