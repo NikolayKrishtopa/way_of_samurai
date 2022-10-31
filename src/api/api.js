@@ -12,9 +12,9 @@ const axiosReq = axios.create({
 })
 
 const usersApi = {
-  getUsers(showOnlyFriends = false, page = 1, search = '') {
+  getUsers(isOnlyFriendsShown = false, page = 1, search = '') {
     return axiosReq.get(
-      `users?page=${page}${showOnlyFriends ? `&friend=true` : ''}${
+      `users?page=${page}${isOnlyFriendsShown ? `&friend=true` : ''}${
         search.length > 0 ? `&term=${search}` : ''
       }`
     )

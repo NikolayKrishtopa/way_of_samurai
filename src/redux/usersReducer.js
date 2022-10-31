@@ -1,10 +1,15 @@
 import { ACTION_TYPES } from '../utils/action-creators'
+import actionCreators from '../utils/action-creators'
+import { usersApi } from '../api/api'
 
-let initialState = {
+const { setIsLoading, setPage, setUsers, setTotalUsersQty } = actionCreators
+
+const initialState = {
   users: [],
   usersShownPerPage: 10,
+  totalUsersQty: 0,
   page: 1,
-  showOnlyFriends: false,
+  isOnlyFriendsShown: false,
   searchUserTextValue: '',
   userSearch: '',
   isLoading: false,
@@ -44,12 +49,12 @@ export default function usersReducer(state = initialState, action) {
     }
     case ACTION_TYPES.SHOW_ALL_USERS: {
       const stateCopy = { ...state }
-      stateCopy.showOnlyFriends = false
+      stateCopy.isOnlyFriendsShown = false
       return stateCopy
     }
     case ACTION_TYPES.SHOW_ONLY_FRIENDS: {
       const stateCopy = { ...state }
-      stateCopy.showOnlyFriends = true
+      stateCopy.isOnlyFriendsShown = true
       return stateCopy
     }
     case ACTION_TYPES.CHANGE_USER_SEARCH_TEXT: {
@@ -81,7 +86,50 @@ export default function usersReducer(state = initialState, action) {
       }
       return stateCopy
     }
+    case ACTION_TYPES.SET_TOTAL_USERS_QTY: {
+      const stateCopy = {
+        ...state,
+        totalUsersQty: action.qty,
+      }
+      return stateCopy
+    }
     default:
       return state
   }
 }
+// ***thunkCreators***
+
+export const getUsers =
+  (isOnlyFriendsShown, page, userSearch, initialUsers = []) =>
+  (dispatch) => {
+    dispatch(setIsLoading(true))
+    usersApi
+      .getUsers(isOnlyFriendsShown, page, userSearch)
+      .then((res) => {
+        initialUsers.length > 0
+          ? dispatch(
+              setUsers([
+                ...initialUsers,
+                ...res.data.items.filter(
+                  (e) => !initialUsers.some((i) => i.id === e.id)
+                ),
+              ])
+            )
+          : dispatch(setUsers([...res.data.items]))
+        dispatch(setTotalUsersQty(res.data.totalCount))
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        dispatch(actionCreators.setIsLoading(false))
+      })
+  }
+
+export const followUser = (id) => (dispatch) {
+    
+  }
+
+  export const unfollowUser = (id) => (dispatch) {
+    
+  }
+
+  

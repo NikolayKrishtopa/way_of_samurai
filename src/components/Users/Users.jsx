@@ -19,7 +19,7 @@ export default function Users(props) {
       <div className={s.usersNavbar}>
         <button
           className={`${s.showOnlyFriendsButton} ${
-            !usersPage.showOnlyFriends && s.showOnlyFriendsButton_active
+            !usersPage.isOnlyFriendsShown && s.showOnlyFriendsButton_active
           }`}
           onClick={onShowAllUsers}
         >
@@ -27,7 +27,7 @@ export default function Users(props) {
         </button>
         <button
           className={`${s.showOnlyFriendsButton} ${
-            usersPage.showOnlyFriends && s.showOnlyFriendsButton_active
+            usersPage.isOnlyFriendsShown && s.showOnlyFriendsButton_active
           }`}
           onClick={onShowOnlyFriends}
         >

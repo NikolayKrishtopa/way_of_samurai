@@ -17,6 +17,7 @@ const ACTION_TYPES = {
   SET_USER: 'SET-USER',
   START_FOLLOWING_REQ: 'START_FOLLOWING_REQ',
   FINISH_FOLLOWING_REQ: 'FINISH_FOLLOWING_REQ',
+  SET_TOTAL_USERS_QTY: 'SET-TOTAL-USERS-QTY',
 }
 
 const actionCreators = {
@@ -81,6 +82,10 @@ const actionCreators = {
   finishFollowingReq: (id) => ({
     type: ACTION_TYPES.FINISH_FOLLOWING_REQ,
     id,
+  }),
+  setTotalUsersQty: (qty) => ({
+    type: ACTION_TYPES.SET_TOTAL_USERS_QTY,
+    qty,
   }),
 }
 export default actionCreators
