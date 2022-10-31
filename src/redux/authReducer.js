@@ -1,4 +1,8 @@
 import { ACTION_TYPES } from '../utils/action-creators'
+import actionCreators from '../utils/action-creators'
+import { authApi } from '../api/api'
+
+const { setIsLoading, setUser } = actionCreators
 
 const { SET_USER, SET_IS_LOADING } = ACTION_TYPES
 
@@ -25,4 +29,64 @@ export default function profileReducer(state = initialState, action) {
     default:
       return state
   }
+}
+
+export const handleSubmitLoginReq =
+  (values, redirectSuccess, redirectFail) => (dispatch) => {
+    dispatch(setIsLoading(true))
+    authApi
+      .login(values)
+      .then((res) => {
+        if (res.data.resultCode === 0) {
+          dispatch(setUser(res.data.data))
+          redirectSuccess()
+        } else {
+          redirectFail()
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false))
+      })
+  }
+
+export const checkIfAuthorised =
+  (redirectSuccess, redirectFail) => (dispatch) => {
+    dispatch(setIsLoading(true))
+    authApi
+      .checkAuth()
+      .then((res) => {
+        if (res.data.resultCode === 1) {
+          redirectFail()
+          return
+        }
+        dispatch(setUser(res.data.data))
+        redirectSuccess()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false))
+      })
+  }
+
+export const handleLogOut = (redirectSuccess) => (dispatch) => {
+  dispatch(setIsLoading(true))
+  authApi
+    .logout()
+    .then((res) => {
+      if (res.data.resultCode === 0) {
+        dispatch(setUser({}))
+        redirectSuccess()
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    .finally(() => {
+      setIsLoading(false)
+    })
 }
