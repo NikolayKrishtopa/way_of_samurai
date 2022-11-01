@@ -3,7 +3,8 @@ import actionCreators from '../../utils/action-creators'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PopupLoading from '../PopupLoading/PopupLoading'
-import { usersApi } from '../../api/api'
+import ProtectedRoute from '../ProtectedRoute'
+
 import {
   getUsers,
   doFollowUser,
@@ -72,8 +73,16 @@ function UsersContainer(props) {
   )
 }
 
+function mapStateToPropsAuth(state) {
+  return {
+    isLogged: state.auth.isLogged,
+  }
+}
+
 function mapStateToProps(state) {
-  return { usersPage: state.usersPage }
+  return {
+    usersPage: state.usersPage,
+  }
 }
 
 export default connect(mapStateToProps, {
@@ -86,4 +95,4 @@ export default connect(mapStateToProps, {
   getUsers,
   doFollowUser,
   doUnfollowUser,
-})(UsersContainer)
+})(ProtectedRoute(UsersContainer))
