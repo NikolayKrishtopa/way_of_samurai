@@ -2,6 +2,7 @@ import Profile from './Profile'
 import actionCreators from '../../utils/action-creators'
 import { connect } from 'react-redux'
 import ProtectedRoute from '../ProtectedRoute'
+import { compose } from 'redux'
 
 function mapStateToProps(state) {
   return {
@@ -10,9 +11,10 @@ function mapStateToProps(state) {
   }
 }
 
-const ProfileContainer = connect(mapStateToProps, {
-  onAddPost: actionCreators.addPost,
-  onPostTextChange: actionCreators.changePostText,
-})(ProtectedRoute(Profile))
-
-export default ProfileContainer
+export default compose(
+  connect(mapStateToProps, {
+    onAddPost: actionCreators.addPost,
+    onPostTextChange: actionCreators.changePostText,
+  }),
+  ProtectedRoute
+)(Profile)

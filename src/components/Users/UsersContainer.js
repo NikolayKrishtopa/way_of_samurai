@@ -2,6 +2,7 @@ import Users from './Users'
 import actionCreators from '../../utils/action-creators'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import PopupLoading from '../PopupLoading/PopupLoading'
 import ProtectedRoute from '../ProtectedRoute'
 
@@ -73,26 +74,24 @@ function UsersContainer(props) {
   )
 }
 
-function mapStateToPropsAuth(state) {
+function mapStateToProps(state) {
   return {
+    usersPage: state.usersPage,
     isLogged: state.auth.isLogged,
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    usersPage: state.usersPage,
-  }
-}
-
-export default connect(mapStateToProps, {
-  setPage,
-  showAllUsers,
-  showOnlyFriends,
-  changeUserSearchText,
-  submitUserSearch,
-  setIsLoading,
-  getUsers,
-  doFollowUser,
-  doUnfollowUser,
-})(ProtectedRoute(UsersContainer))
+export default compose(
+  connect(mapStateToProps, {
+    setPage,
+    showAllUsers,
+    showOnlyFriends,
+    changeUserSearchText,
+    submitUserSearch,
+    setIsLoading,
+    getUsers,
+    doFollowUser,
+    doUnfollowUser,
+  }),
+  ProtectedRoute
+)(UsersContainer)
