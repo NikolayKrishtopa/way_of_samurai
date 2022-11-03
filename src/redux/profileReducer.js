@@ -18,6 +18,7 @@ let initialState = {
       small: '',
       large: '',
     },
+    status: '',
     posts: [],
   },
   isLoading: false,

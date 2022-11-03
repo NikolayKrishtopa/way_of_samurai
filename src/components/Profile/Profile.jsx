@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
 
@@ -20,6 +21,9 @@ export default function Profile(props) {
           className={s.avatar}
         />
         <div className={s.userDescription}>
+          <div className={s.userStatus}>
+            <span>{profilePage.profile.status}</span>
+          </div>
           <div className={s.userDescriptionItem}>
             <span className={s.userDescrTitle}>Name: </span>
             <span>{profilePage.profile.fullName}</span>
@@ -57,6 +61,7 @@ export default function Profile(props) {
           </button>
         </div>
       )}
+      {!isOwn && <Link to="/users">назад к списку пользователей</Link>}
       <div className={s.myPosts}>
         <h3 className={s.myPostsTitle}>
           {isOwn ? 'My posts:' : `${profilePage.profile.fullName}'s posts`}
