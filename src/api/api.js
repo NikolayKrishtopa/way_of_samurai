@@ -41,4 +41,19 @@ const authApi = {
   },
 }
 
-export { usersApi, authApi }
+const profileApi = {
+  getUserData(userId) {
+    return axiosReq.get(BASE_URL + 'profile/' + userId)
+  },
+  getUserStatus(userId) {
+    return axiosReq.get(BASE_URL + 'profile/status/' + userId)
+  },
+  updateMyStatus() {
+    return axiosReq.put(BASE_URL + 'profile/status/')
+  },
+  updateMyProfile(profileData) {
+    return axiosReq.put(BASE_URL + 'profile', {}, profileData)
+  },
+}
+
+export { usersApi, authApi, profileApi }

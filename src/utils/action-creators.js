@@ -1,6 +1,7 @@
 const ACTION_TYPES = {
   ADD_POST: 'ADD-POST',
-  CHANGE_POST_TEXT: 'CHANGE-POST-TEXT',
+  SET_PROFILE: 'SET-PROFILE',
+  SET_USER_STATUS: 'SET-USER-STATUS',
   SEND_MESSAGE: 'ADD-MESSAGE',
   CHANGE_MESSAGE_TEXT: 'CHANGE-MESSAGE-TEXT',
   SWITCH_COMPANION: 'SWITCH-COMPANION',
@@ -21,10 +22,17 @@ const ACTION_TYPES = {
 }
 
 const actionCreators = {
-  addPost: () => ({ type: ACTION_TYPES.ADD_POST }),
-  changePostText: (text) => ({
-    type: ACTION_TYPES.CHANGE_POST_TEXT,
-    postText: text,
+  addPost: (postText) => ({
+    type: ACTION_TYPES.ADD_POST,
+    postText,
+  }),
+  setUserProfile: (profile) => ({
+    type: ACTION_TYPES.SET_PROFILE,
+    profile,
+  }),
+  setUserStatus: (status) => ({
+    type: ACTION_TYPES.SET_USER_STATUS,
+    status,
   }),
   sendMessage: () => ({ type: ACTION_TYPES.SEND_MESSAGE }),
   changeMessageText: (text) => ({

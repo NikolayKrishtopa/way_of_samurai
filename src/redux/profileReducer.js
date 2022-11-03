@@ -1,37 +1,65 @@
-const ADD_POST = 'ADD-POST'
-const CHANGE_POST_TEXT = 'CHANGE-POST-TEXT'
+import { profileApi } from '../api/api'
+import { ACTION_TYPES } from '../utils/action-creators'
+import actionCreators from '../utils/action-creators'
+
+const { setUserProfile, setUserStatus, setIsLoading } = actionCreators
+
+const { ADD_POST, SET_PROFILE, SET_USER_STATUS, SET_IS_LOADING } = ACTION_TYPES
 
 let initialState = {
-  posts: [
-    { id: 1, text: 'Привет! Мне скучно', likes: 1 },
-    { id: 2, text: 'Я пишу соцсеть', likes: 7 },
-    { id: 3, text: 'Но я слишком тупой', likes: 3 },
-    { id: 4, text: 'Что нового?', likes: 4 },
-    { id: 5, text: 'Кто последний из РФ, выключите свет!', likes: 6 },
-    { id: 6, text: 'Хочу хинкали', likes: 2 },
-    { id: 7, text: 'А может даже кебаб', likes: 1 },
-    { id: 8, text: 'В Грузии все вкусно', likes: 3 },
-  ],
-  newPostText: '',
+  profile: {
+    aboutMe: '',
+    contacts: {},
+    lookingForAJob: '',
+    lookingForAJobDescription: '',
+    fullName: '',
+    userId: '',
+    photos: {
+      small: '',
+      large: '',
+    },
+    posts: [],
+  },
+  isLoading: false,
 }
 
 export default function profileReducer(state = initialState, action) {
   const stateCopy = { ...state }
   switch (action.type) {
+    case SET_PROFILE:
+      stateCopy.profile = { ...action.profile, posts: [] }
+      return stateCopy
+    case SET_USER_STATUS:
+      stateCopy.profile = { ...state.profile, status: action.status }
+      return stateCopy
     case ADD_POST:
-      stateCopy.posts = [...state.posts]
-      stateCopy.posts.unshift({
-        text: stateCopy.newPostText,
-        id: stateCopy.posts.length + 1,
+      stateCopy.profile = { ...state.profile }
+      stateCopy.posts = [...state.profile.posts]
+      stateCopy.profile.posts.unshift({
+        text: action.postText,
+        id: stateCopy.profile.posts.length + 1,
         likes: 0,
       })
-      stateCopy.newPostText = ''
       return stateCopy
-
-    case CHANGE_POST_TEXT:
-      stateCopy.newPostText = action.postText
+    case SET_IS_LOADING:
+      stateCopy.isLoading = action.isLoading
       return stateCopy
     default:
       return state
   }
+}
+
+export const doUpdateProfile = (userId) => (dispatch) => {
+  dispatch(setIsLoading(true))
+  profileApi
+    .getUserData(userId)
+    .then((res) => {
+      dispatch(setUserProfile(res.data))
+      profileApi
+        .getUserStatus(userId)
+        .then((res) => dispatch(setUserStatus(res.data)))
+        .catch((err) => console.log(err))
+    })
+    .catch((err) => console.log(err))
+    .finally(() => dispatch(setIsLoading(false)))
 }

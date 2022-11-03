@@ -1,9 +1,8 @@
-import avatar from '../../../pictures/avatar.jpg'
 import s from './MyPost.module.css'
 import likeIcon from '../../../pictures/likeIcon.svg'
 
 export default function MyPost(props) {
-  const { postText, likes } = props
+  const { postText, likes, avatar } = props
 
   return (
     <div className={s.myPost}>

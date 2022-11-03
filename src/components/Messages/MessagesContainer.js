@@ -1,7 +1,7 @@
 import Messages from './Messages'
 import actionCreators from '../../utils/action-creators'
 import { connect } from 'react-redux'
-import ProtectedRoute from '../ProtectedRoute'
+import ProtectedRoute from '../../hok/ProtectedRoute'
 import { compose } from 'redux'
 
 function mapStateToProps(state) {

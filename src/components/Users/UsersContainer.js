@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import PopupLoading from '../PopupLoading/PopupLoading'
-import ProtectedRoute from '../ProtectedRoute'
+import ProtectedRoute from '../../hok/ProtectedRoute'
 
 import {
   getUsers,

@@ -6,7 +6,7 @@ export default function User(props) {
 
   return (
     <div className={s.user}>
-      <NavLink to={`profile/${user.id}`} className={s.userLink}>
+      <NavLink to={`./profile/${user.id}`} className={s.userLink}>
         <img
           src={
             user.photos.small

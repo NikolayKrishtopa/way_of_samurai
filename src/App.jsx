@@ -18,7 +18,8 @@ export default function App(props) {
         <Routes>
           <Route path="/login" element={<LoginContainer />} />
           <Route path="/profile" element={<ProfileContainer />} />
-          <Route path="/messages/*" element={<MessagesContainer />} />
+          <Route path="users/profile/:userId" element={<ProfileContainer />} />
+          <Route path="/messages" element={<MessagesContainer />} />
           <Route path="/news" element={<News />} />
           <Route path="/music" element={<Music />} />
           <Route path="/settings" element={<Settings />} />
