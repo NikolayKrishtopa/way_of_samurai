@@ -18,7 +18,7 @@ let initialState = {
       small: '',
       large: '',
     },
-    status: '',
+    status: 'На чиле на расслабоне',
     posts: [],
   },
   isLoading: false,
@@ -63,4 +63,10 @@ export const doUpdateProfile = (userId) => (dispatch) => {
     })
     .catch((err) => console.log(err))
     .finally(() => dispatch(setIsLoading(false)))
+}
+
+export const doSetStatus = (statusText) => (dispatch) => {
+  profileApi
+    .updateMyStatus(statusText)
+    .then(() => dispatch(setUserStatus(statusText)))
 }
