@@ -1,9 +1,10 @@
 import s from './Header.module.css'
 import logo from '../../pictures/logo.png'
 import { NavLink } from 'react-router-dom'
+import { LANGUAGES } from '../../utils/action-creators'
 
 export default function Header(props) {
-  const { auth, onLogOut } = props
+  const { auth, onLogOut, lang } = props
   return (
     <div className={s.header}>
       <div className={s.header__logoBlock}>
@@ -14,22 +15,24 @@ export default function Header(props) {
           className={`${s.logo} ${s.logo_style_reversed}`}
         />
         <p className={s.header__text}>
-          Way of the Samurai&nbsp;
+          {lang === LANGUAGES.EN ? 'Way of the Samurai' : 'Путь самурая'}
           <span className={s.header__text_type_author}>
-            Nikolay Krishtopa's version
+            {lang === LANGUAGES.EN
+              ? 'Social network for developers'
+              : 'Социальная сеть для разработчиков'}
           </span>
         </p>
       </div>
       <div className={s.authBlock}>
         {!auth.isLogged ? (
           <NavLink to="/login" className={s.header__link}>
-            Войти
+            {lang === LANGUAGES.EN ? 'Sign-in' : 'Войти'}
           </NavLink>
         ) : (
           <div className={s.header__loginBlock}>
             <p className={s.header__link}>{auth.user.login}</p>
             <p className={s.header__link} onClick={onLogOut}>
-              Выйти
+              {lang === LANGUAGES.EN ? 'Sign-out' : 'Выйти'}
             </p>
           </div>
         )}

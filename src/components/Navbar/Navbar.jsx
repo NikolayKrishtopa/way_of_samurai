@@ -1,27 +1,38 @@
 import { NavLink } from 'react-router-dom'
 import s from './Navbar.module.css'
+import { LANGUAGES } from '../../utils/action-creators'
+import { connect } from 'react-redux'
 
-export default function Navbar() {
+function Navbar(props) {
+  const { lang } = props
   return (
     <div className={s.navbar}>
       <NavLink to="/profile" className={`${s.navbarItem} navbarItem`}>
-        Профиль
+        {lang === LANGUAGES.EN ? 'Profile' : 'Профиль'}
       </NavLink>
       <NavLink to="/messages" className={`${s.navbarItem} navbarItem`}>
-        Сообщения
-      </NavLink>
-      <NavLink to="/news" className={`${s.navbarItem} navbarItem`}>
-        Новости
-      </NavLink>
-      <NavLink to="/music" className={`${s.navbarItem} navbarItem`}>
-        Музыка
-      </NavLink>
-      <NavLink to="/settings" className={`${s.navbarItem} navbarItem`}>
-        Настройки
+        {lang === LANGUAGES.EN ? 'Messages' : 'Сообщения'}
       </NavLink>
       <NavLink to="/users" className={`${s.navbarItem} navbarItem`}>
-        Пользователи
+        {lang === LANGUAGES.EN ? 'Users' : 'Пользователи'}
+      </NavLink>
+      <NavLink to="/settings" className={`${s.navbarItem} navbarItem`}>
+        {lang === LANGUAGES.EN ? 'Settings' : 'Настройки'}
+      </NavLink>
+      <NavLink to="/news" className={`${s.navbarItem} navbarItem`}>
+        {lang === LANGUAGES.EN ? 'News' : 'Новости'}
+      </NavLink>
+      <NavLink to="/music" className={`${s.navbarItem} navbarItem`}>
+        {lang === LANGUAGES.EN ? 'Music' : 'Музыка'}
       </NavLink>
     </div>
   )
 }
+
+function mapStateToProps(state) {
+  return {
+    lang: state.settings.lang,
+  }
+}
+
+export default connect(mapStateToProps, {})(Navbar)

@@ -33,6 +33,7 @@ function mapStateToProps(state) {
     profilePage: state.profilePage,
     isLogged: state.auth.isLogged,
     myId: state.auth.user.id,
+    lang: state.settings.lang,
   }
 }
 

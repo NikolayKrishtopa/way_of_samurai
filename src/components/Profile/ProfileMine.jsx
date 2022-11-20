@@ -2,9 +2,12 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
+import { NavLink } from 'react-router-dom'
+import { LANGUAGES } from '../../utils/action-creators'
+const { EN, RU } = LANGUAGES
 
 export default function Profile(props) {
-  const { profilePage, addPost, doSetStatus } = props
+  const { profilePage, addPost, doSetStatus, lang } = props
   const [newPostText, setNewPostText] = useState('')
   const [isStatusEditMode, setIsStatusEditMode] = useState(false)
   const [currentStatusText, setCurrentStatusText] = useState(
@@ -46,6 +49,7 @@ export default function Profile(props) {
               <span>{profilePage.profile.status}</span>
             ) : (
               <input
+                className={s.editProfileInput}
                 value={currentStatusText}
                 onChange={handleProfileChange}
                 autoFocus={true}
@@ -54,26 +58,48 @@ export default function Profile(props) {
             )}
           </div>
           <div className={s.userDescriptionItem}>
-            <span className={s.userDescrTitle}>Name: </span>
+            <span className={s.userDescrTitle}>
+              {lang === EN ? 'Name:' : 'Имя:'}&nbsp;{' '}
+            </span>
             <span>{profilePage.profile.fullName}</span>
           </div>
           <div className={s.userDescriptionItem}>
-            <span className={s.userDescrTitle}>About: </span>
+            <span className={s.userDescrTitle}>
+              {lang === EN ? 'About:' : 'О пользователе:'}&nbsp;
+            </span>
             <span>{profilePage.profile.aboutMe}</span>
           </div>
           <div className={s.userDescriptionItem}>
-            <span className={s.userDescrTitle}>Is looking job: </span>
-            <span>{profilePage.profile.lookingForAJob ? 'Yes' : 'No'}</span>
+            <span className={s.userDescrTitle}>
+              {lang === EN ? 'Is looking job:' : 'Ищет ли работу:'}&nbsp;
+            </span>
+            <span>
+              {profilePage.profile.lookingForAJob
+                ? lang === EN
+                  ? 'Yes'
+                  : 'Да'
+                : lang === EN
+                ? 'No'
+                : 'Нет'}
+            </span>
           </div>
           <div className={s.userDescriptionItem}>
-            <span className={s.userDescrTitle}>Looking job status: </span>
+            <span className={s.userDescrTitle}>
+              {lang === EN ? 'Looking job status:' : 'Статус поиска работы:'}
+              &nbsp;
+            </span>
             <span>{profilePage.profile.lookingForAJobDescription}</span>
           </div>
+          <NavLink to="edit-profile">
+            <button className={s.editProfileButton}>
+              {lang === EN ? 'Edit profile' : 'Редактировать профиль'}
+            </button>
+          </NavLink>
         </div>
       </div>
       <div className={s.createPost}>
         <textarea
-          placeholder="Add post"
+          placeholder={lang === EN ? 'Type here' : 'Введите текст'}
           className={s.textArea}
           value={newPostText}
           onChange={(e) => setNewPostText(e.target.value)}
@@ -85,11 +111,13 @@ export default function Profile(props) {
           onClick={handleAddPost}
           disabled={newPostText.length === 0}
         >
-          Add post
+          {lang === EN ? 'Add post' : 'Добавить пост'}
         </button>
       </div>
       <div className={s.myPosts}>
-        <h3 className={s.myPostsTitle}>My posts:</h3>
+        <h3 className={s.myPostsTitle}>
+          {lang === EN ? 'My posts:' : 'Мои публикации'}
+        </h3>
         {profilePage.profile.posts.map((e, i) => (
           <MyPost
             postText={e.text}

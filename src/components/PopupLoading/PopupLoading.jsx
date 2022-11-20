@@ -1,7 +1,10 @@
-import spinner from '../../pictures/spinner.gif'
+// import spinner from '../../pictures/spinner.gif'
 import s from './PopupLoading.module.css'
+import { LANGUAGES } from '../../utils/action-creators'
+const { EN } = LANGUAGES
 
-export default function PopupLoading() {
+export default function PopupLoading(props) {
+  const { lang } = props
   return (
     <div className={s.popup}>
       <img
@@ -9,7 +12,9 @@ export default function PopupLoading() {
         alt="Идет загрузка"
         className={s.popup__spinner}
       />
-      <p className={s.popup__text}>loading...</p>
+      <p className={s.popup__text}>
+        {lang === EN ? 'loading...' : 'Загрузка...'}
+      </p>
     </div>
   )
 }

@@ -11,10 +11,21 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  aspect-ratio: 1;
   object-fit: cover;
   align-content: center;
   object-fit: cover;
+  position: relative;
+}
+
+.avatar:hover::after {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  content: url(../../pictures/pensil-icon.svg);
+  /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
 .userInfo {
@@ -87,4 +98,32 @@
 
 .addPostButton_active:hover {
   scale: 1.05;
+}
+
+.editProfileButton {
+  border: none;
+  background-color: rgb(74, 138, 189);
+  width: 150px;
+  height: 45px;
+  color: rgb(10, 5, 62);
+  font-size: 16px;
+  font-style: italic;
+  border-radius: 6px;
+}
+
+.editProfileButton:hover {
+  cursor: pointer;
+  scale: 1.03;
+}
+
+.editProfileInput {
+  margin: 0;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 18px;
+  color: rgb(29, 97, 164);
+}
+
+.editProfileInput:focus {
+  border-color: aqua;
 }

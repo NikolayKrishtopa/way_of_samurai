@@ -3,6 +3,7 @@ import profileReducer from './profileReducer'
 import dialogsReducer from './dialogsReducer'
 import usersReducer from './usersReducer'
 import authReducer from './authReducer'
+import settingsReducer from './settingsReducer'
 import thunkMiddleware from 'redux-thunk'
 
 const reducers = combineReducers({
@@ -10,6 +11,7 @@ const reducers = combineReducers({
   messagesPage: dialogsReducer,
   usersPage: usersReducer,
   auth: authReducer,
+  settings: settingsReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

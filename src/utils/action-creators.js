@@ -19,6 +19,21 @@ const ACTION_TYPES = {
   START_FOLLOWING_REQ: 'START_FOLLOWING_REQ',
   FINISH_FOLLOWING_REQ: 'FINISH_FOLLOWING_REQ',
   SET_TOTAL_USERS_QTY: 'SET-TOTAL-USERS-QTY',
+  SWITCH_LANGUAGE: 'SWITCH-LANGUAGE',
+  SWITCH_THEME: 'SWITCH-THEME',
+}
+
+const LANGUAGES = {
+  RU: 'RU',
+  EN: 'EN',
+  FR: 'FR',
+  SP: 'SP',
+  GER: 'GER',
+}
+
+const THEMES = {
+  DARK: 'DARK',
+  LIGHT: 'LIGHT',
 }
 
 const actionCreators = {
@@ -95,7 +110,15 @@ const actionCreators = {
     type: ACTION_TYPES.SET_TOTAL_USERS_QTY,
     qty,
   }),
+  switchLang: (lang) => ({
+    type: ACTION_TYPES.SWITCH_LANGUAGE,
+    lang,
+  }),
+  switchTheme: (theme) => ({
+    type: ACTION_TYPES.SWITCH_THEME,
+    theme,
+  }),
 }
 export default actionCreators
 
-export { ACTION_TYPES }
+export { ACTION_TYPES, LANGUAGES, THEMES }

@@ -32,6 +32,7 @@ function UsersContainer(props) {
     getUsers,
     doFollowUser,
     doUnfollowUser,
+    lang,
   } = props
 
   const {
@@ -58,7 +59,7 @@ function UsersContainer(props) {
 
   return (
     <>
-      {isLoading && <PopupLoading />}
+      {isLoading && <PopupLoading lang={lang} />}
       <Users
         usersPage={usersPage}
         onFollowUser={doFollowUser}
@@ -69,6 +70,7 @@ function UsersContainer(props) {
         onChangeUserSearchText={changeUserSearchText}
         onSubmitUserSearch={submitUserSearch}
         isExtendButtonDisabled={totalUsersQty <= usersShownPerPage}
+        lang={lang}
       />
     </>
   )
@@ -78,6 +80,7 @@ function mapStateToProps(state) {
   return {
     usersPage: state.usersPage,
     isLogged: state.auth.isLogged,
+    lang: state.settings.lang,
   }
 }
 

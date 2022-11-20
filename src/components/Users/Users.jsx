@@ -12,6 +12,7 @@ export default function Users(props) {
     onChangeUserSearchText,
     onSubmitUserSearch,
     isExtendButtonDisabled,
+    lang,
   } = props
 
   return (

@@ -6,7 +6,7 @@ import PopupLoading from '../PopupLoading/PopupLoading'
 import { checkIfAuthorised, handleLogOut } from '../../redux/authReducer'
 
 function HeaderContainer(props) {
-  const { auth, checkIfAuthorised, handleLogOut } = props
+  const { auth, checkIfAuthorised, handleLogOut, lang } = props
 
   const navigate = useNavigate()
 
@@ -22,14 +22,23 @@ function HeaderContainer(props) {
   }, [auth.isLogged])
 
   if (auth.isLoading) {
-    return <PopupLoading />
+    return <PopupLoading lang={lang} />
   } else {
-    return <Header auth={auth} onLogOut={() => handleLogOut(loginRedirect)} />
+    return (
+      <Header
+        auth={auth}
+        onLogOut={() => handleLogOut(loginRedirect)}
+        lang={props.lang}
+      />
+    )
   }
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth }
+  return {
+    auth: state.auth,
+    lang: state.settings.lang,
+  }
 }
 
 export default connect(mapStateToProps, {
