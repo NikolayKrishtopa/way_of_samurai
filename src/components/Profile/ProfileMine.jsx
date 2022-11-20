@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useState } from 'react'
 import MyPost from './MyPost/MyPost'
 import s from './Profile.module.css'
@@ -10,6 +11,10 @@ export default function Profile(props) {
     profilePage.profile.status
   )
 
+  useEffect(() => {
+    setCurrentStatusText(profilePage.profile.status)
+  }, [profilePage.profile.status])
+
   function handleAddPost() {
     addPost(newPostText)
     setNewPostText('')
@@ -20,7 +25,7 @@ export default function Profile(props) {
   }
 
   function handleProfileUpdate() {
-    doSetStatus(currentStatusText)
+    doSetStatus(currentStatusText, profilePage.profile.status)
     setIsStatusEditMode(false)
   }
 

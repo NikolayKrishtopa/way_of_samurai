@@ -10,7 +10,6 @@ const axiosReq = axios.create({
     'API-KEY': API_KEY,
   },
 })
-
 const usersApi = {
   getUsers(isOnlyFriendsShown = false, page = 1, search = '') {
     return axiosReq.get(
@@ -48,8 +47,8 @@ const profileApi = {
   getUserStatus(userId) {
     return axiosReq.get(BASE_URL + 'profile/status/' + userId)
   },
-  updateMyStatus() {
-    return axiosReq.put(BASE_URL + 'profile/status/')
+  updateMyStatus(statusText) {
+    return axiosReq.put(BASE_URL + 'profile/status', { status: statusText })
   },
   updateMyProfile(profileData) {
     return axiosReq.put(BASE_URL + 'profile', {}, profileData)

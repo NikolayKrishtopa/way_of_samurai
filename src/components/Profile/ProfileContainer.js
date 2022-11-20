@@ -2,12 +2,12 @@ import ProfileMine from './ProfileMine'
 import ProfileOthers from './ProfileOthers'
 import actionCreators from '../../utils/action-creators'
 import { connect } from 'react-redux'
-import ProtectedRoute from '../../hok/ProtectedRoute'
 import { compose } from 'redux'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { doUpdateProfile, doSetStatus } from '../../redux/profileReducer'
 import PopupLoading from '../PopupLoading/PopupLoading'
+import ProtectedRoute from '../../hok/ProtectedRoute'
 const { addPost } = actionCreators
 
 function ProfileContainer(props) {
@@ -15,6 +15,7 @@ function ProfileContainer(props) {
   const { userId = myId } = useParams()
 
   useEffect(() => {
+    if (!userId) return
     doUpdateProfile(userId)
   }, [userId])
 
@@ -40,6 +41,6 @@ export default compose(
     addPost,
     doUpdateProfile,
     doSetStatus,
-  })
-  // ProtectedRoute
+  }),
+  ProtectedRoute
 )(ProfileContainer)

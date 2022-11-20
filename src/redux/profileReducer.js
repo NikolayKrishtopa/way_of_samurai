@@ -18,7 +18,7 @@ let initialState = {
       small: '',
       large: '',
     },
-    status: 'На чиле на расслабоне',
+    status: '',
     posts: [],
   },
   isLoading: false,
@@ -55,18 +55,26 @@ export const doUpdateProfile = (userId) => (dispatch) => {
   profileApi
     .getUserData(userId)
     .then((res) => {
-      dispatch(setUserProfile(res.data))
       profileApi
         .getUserStatus(userId)
-        .then((res) => dispatch(setUserStatus(res.data)))
+        .then((status) => {
+          dispatch(setUserProfile(res.data))
+          dispatch(setUserStatus(status.data))
+        })
         .catch((err) => console.log(err))
     })
     .catch((err) => console.log(err))
     .finally(() => dispatch(setIsLoading(false)))
 }
 
-export const doSetStatus = (statusText) => (dispatch) => {
+export const doSetStatus = (statusText, currentStatus) => (dispatch) => {
+  if (currentStatus === statusText) return
+  dispatch(setUserStatus('status updating...'))
   profileApi
     .updateMyStatus(statusText)
     .then(() => dispatch(setUserStatus(statusText)))
+    .catch((err) => {
+      console.log(err)
+      dispatch(setUserStatus(currentStatus))
+    })
 }
