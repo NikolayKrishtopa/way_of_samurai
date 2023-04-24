@@ -1,35 +1,33 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
-import MyPost from './MyPost/MyPost'
-import s from './Profile.module.css'
-import { NavLink } from 'react-router-dom'
-import { LANGUAGES } from '../../utils/action-creators'
-const { EN, RU } = LANGUAGES
+import { useEffect } from 'react';
+import { useState } from 'react';
+import MyPost from './MyPost/MyPost';
+import s from './Profile.module.css';
+import { NavLink } from 'react-router-dom';
 
 export default function Profile(props) {
-  const { profilePage, addPost, doSetStatus, lang } = props
-  const [newPostText, setNewPostText] = useState('')
-  const [isStatusEditMode, setIsStatusEditMode] = useState(false)
+  const { profilePage, addPost, doSetStatus, lang } = props;
+  const [newPostText, setNewPostText] = useState('');
+  const [isStatusEditMode, setIsStatusEditMode] = useState(false);
   const [currentStatusText, setCurrentStatusText] = useState(
     profilePage.profile.status
-  )
+  );
 
   useEffect(() => {
-    setCurrentStatusText(profilePage.profile.status)
-  }, [profilePage.profile.status])
+    setCurrentStatusText(profilePage.profile.status);
+  }, [profilePage.profile.status]);
 
   function handleAddPost() {
-    addPost(newPostText)
-    setNewPostText('')
+    addPost(newPostText);
+    setNewPostText('');
   }
 
   function handleProfileChange(e) {
-    setCurrentStatusText(e.target.value)
+    setCurrentStatusText(e.target.value);
   }
 
   function handleProfileUpdate() {
-    doSetStatus(currentStatusText, profilePage.profile.status)
-    setIsStatusEditMode(false)
+    doSetStatus(currentStatusText, profilePage.profile.status);
+    setIsStatusEditMode(false);
   }
 
   return (
@@ -37,7 +35,7 @@ export default function Profile(props) {
       <div className={s.userInfo}>
         <img
           src={profilePage.profile.photos.large}
-          alt="фото пользователя"
+          alt='фото пользователя'
           className={s.avatar}
         />
         <div className={s.userDescription}>
@@ -59,47 +57,47 @@ export default function Profile(props) {
           </div>
           <div className={s.userDescriptionItem}>
             <span className={s.userDescrTitle}>
-              {lang === EN ? 'Name:' : 'Имя:'}&nbsp;{' '}
+              {lang === 'EN' ? 'Name:' : 'Имя:'}&nbsp;{' '}
             </span>
             <span>{profilePage.profile.fullName}</span>
           </div>
           <div className={s.userDescriptionItem}>
             <span className={s.userDescrTitle}>
-              {lang === EN ? 'About:' : 'О пользователе:'}&nbsp;
+              {lang === 'EN' ? 'About:' : 'О пользователе:'}&nbsp;
             </span>
             <span>{profilePage.profile.aboutMe}</span>
           </div>
           <div className={s.userDescriptionItem}>
             <span className={s.userDescrTitle}>
-              {lang === EN ? 'Is looking job:' : 'Ищет ли работу:'}&nbsp;
+              {lang === 'EN' ? 'Is looking job:' : 'Ищет ли работу:'}&nbsp;
             </span>
             <span>
               {profilePage.profile.lookingForAJob
-                ? lang === EN
+                ? lang === 'EN'
                   ? 'Yes'
                   : 'Да'
-                : lang === EN
+                : lang === 'EN'
                 ? 'No'
                 : 'Нет'}
             </span>
           </div>
           <div className={s.userDescriptionItem}>
             <span className={s.userDescrTitle}>
-              {lang === EN ? 'Looking job status:' : 'Статус поиска работы:'}
+              {lang === 'EN' ? 'Looking job status:' : 'Статус поиска работы:'}
               &nbsp;
             </span>
             <span>{profilePage.profile.lookingForAJobDescription}</span>
           </div>
-          <NavLink to="edit-profile">
+          <NavLink to='edit-profile'>
             <button className={s.editProfileButton}>
-              {lang === EN ? 'Edit profile' : 'Редактировать профиль'}
+              {lang === 'EN' ? 'Edit profile' : 'Редактировать профиль'}
             </button>
           </NavLink>
         </div>
       </div>
       <div className={s.createPost}>
         <textarea
-          placeholder={lang === EN ? 'Type here' : 'Введите текст'}
+          placeholder={lang === 'EN' ? 'Type here' : 'Введите текст'}
           className={s.textArea}
           value={newPostText}
           onChange={(e) => setNewPostText(e.target.value)}
@@ -111,12 +109,12 @@ export default function Profile(props) {
           onClick={handleAddPost}
           disabled={newPostText.length === 0}
         >
-          {lang === EN ? 'Add post' : 'Добавить пост'}
+          {lang === 'EN' ? 'Add post' : 'Добавить пост'}
         </button>
       </div>
       <div className={s.myPosts}>
         <h3 className={s.myPostsTitle}>
-          {lang === EN ? 'My posts:' : 'Мои публикации'}
+          {lang === 'EN' ? 'My posts:' : 'Мои публикации'}
         </h3>
         {profilePage.profile.posts.map((e, i) => (
           <MyPost
@@ -128,5 +126,5 @@ export default function Profile(props) {
         ))}
       </div>
     </div>
-  )
+  );
 }

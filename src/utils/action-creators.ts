@@ -1,3 +1,10 @@
+import {
+  LanguageType,
+  ProfileType,
+  ThemeType,
+  UserType,
+} from '../models/models';
+
 const ACTION_TYPES = {
   ADD_POST: 'ADD-POST',
   SET_PROFILE: 'SET-PROFILE',
@@ -21,52 +28,39 @@ const ACTION_TYPES = {
   SET_TOTAL_USERS_QTY: 'SET-TOTAL-USERS-QTY',
   SWITCH_LANGUAGE: 'SWITCH-LANGUAGE',
   SWITCH_THEME: 'SWITCH-THEME',
-}
-
-const LANGUAGES = {
-  RU: 'RU',
-  EN: 'EN',
-  FR: 'FR',
-  SP: 'SP',
-  GER: 'GER',
-}
-
-const THEMES = {
-  DARK: 'DARK',
-  LIGHT: 'LIGHT',
-}
+};
 
 const actionCreators = {
-  addPost: (postText) => ({
+  addPost: (postText: string) => ({
     type: ACTION_TYPES.ADD_POST,
     postText,
   }),
-  setUserProfile: (profile) => ({
+  setUserProfile: (profile: ProfileType) => ({
     type: ACTION_TYPES.SET_PROFILE,
     profile,
   }),
-  setUserStatus: (status) => ({
+  setUserStatus: (status: string) => ({
     type: ACTION_TYPES.SET_USER_STATUS,
     status,
   }),
   sendMessage: () => ({ type: ACTION_TYPES.SEND_MESSAGE }),
-  changeMessageText: (text) => ({
+  changeMessageText: (text: string) => ({
     type: ACTION_TYPES.CHANGE_MESSAGE_TEXT,
     messageText: text,
   }),
-  switchCompanionId: (id) => ({
+  switchCompanionId: (id: number) => ({
     type: ACTION_TYPES.SWITCH_COMPANION,
     id: id,
   }),
-  followUser: (id) => ({
+  followUser: (id: number) => ({
     type: ACTION_TYPES.FOLLOW_USER,
     id,
   }),
-  unfollowUser: (id) => ({
+  unfollowUser: (id: number) => ({
     type: ACTION_TYPES.UNFOLLOW_USER,
     id,
   }),
-  setPage: (page) => ({
+  setPage: (page: number) => ({
     type: ACTION_TYPES.SET_USERS_PAGE,
     page,
   }),
@@ -79,46 +73,46 @@ const actionCreators = {
   showOnlyFriends: () => ({
     type: ACTION_TYPES.SHOW_ONLY_FRIENDS,
   }),
-  changeUserSearchText: (text) => ({
+  changeUserSearchText: (text: string) => ({
     type: ACTION_TYPES.CHANGE_USER_SEARCH_TEXT,
     text: text,
   }),
   submitUserSearch: () => ({
     type: ACTION_TYPES.SUBMIT_USER_SEARCH,
   }),
-  setUsers: (users) => ({
+  setUsers: (users: UserType[]) => ({
     type: ACTION_TYPES.SET_USERS,
     users,
   }),
-  setIsLoading: (isLoading) => ({
+  setIsLoading: (isLoading: boolean) => ({
     type: ACTION_TYPES.SET_IS_LOADING,
     isLoading,
   }),
-  setUser: (user) => ({
+  setUser: (user: UserType) => ({
     type: ACTION_TYPES.SET_USER,
     user,
   }),
-  startFollowingReq: (id) => ({
+  startFollowingReq: (id: number) => ({
     type: ACTION_TYPES.START_FOLLOWING_REQ,
     id,
   }),
-  finishFollowingReq: (id) => ({
+  finishFollowingReq: (id: number) => ({
     type: ACTION_TYPES.FINISH_FOLLOWING_REQ,
     id,
   }),
-  setTotalUsersQty: (qty) => ({
+  setTotalUsersQty: (qty: number) => ({
     type: ACTION_TYPES.SET_TOTAL_USERS_QTY,
     qty,
   }),
-  switchLang: (lang) => ({
+  switchLang: (lang: LanguageType) => ({
     type: ACTION_TYPES.SWITCH_LANGUAGE,
     lang,
   }),
-  switchTheme: (theme) => ({
+  switchTheme: (theme: ThemeType) => ({
     type: ACTION_TYPES.SWITCH_THEME,
     theme,
   }),
-}
-export default actionCreators
+};
+export default actionCreators;
 
-export { ACTION_TYPES, LANGUAGES, THEMES }
+export { ACTION_TYPES };

@@ -1,6 +1,14 @@
-const SEND_MESSAGE = 'ADD-MESSAGE'
-const CHANGE_MESSAGE_TEXT = 'CHANGE-MESSAGE-TEXT'
-const SWITCH_COMPANION = 'SWITCH-COMPANION'
+import { DialogType, IAction } from '../models/models';
+
+const SEND_MESSAGE = 'ADD-MESSAGE';
+const CHANGE_MESSAGE_TEXT = 'CHANGE-MESSAGE-TEXT';
+const SWITCH_COMPANION = 'SWITCH-COMPANION';
+
+export type DialogStateType = {
+  dialogs: Array<DialogType>;
+  chosenCompanionId: number;
+  newMessageText: string;
+};
 
 let initialState = {
   dialogs: [
@@ -44,28 +52,34 @@ let initialState = {
   ],
   chosenCompanionId: 1,
   newMessageText: '',
-}
+};
 
-export default function dialogsReducer(state = initialState, action) {
+export default function dialogsReducer(state = initialState, action: IAction) {
   switch (action.type) {
     case SEND_MESSAGE: {
-      const stateCopy = { ...state }
-      stateCopy.dialogs = [ ...state.dialogs ]
-      stateCopy.dialogs.map((e,i)=>{return {...state.dialogs[i]}})
-      stateCopy.dialogs.find((e) => e.id === stateCopy.chosenCompanionId)
-        .messages.push(stateCopy.newMessageText)
-      stateCopy.newMessageText = ''
-      return stateCopy}
+      const stateCopy = { ...state };
+      stateCopy.dialogs = [...state.dialogs];
+      stateCopy.dialogs.map((e, i) => {
+        return { ...state.dialogs[i] };
+      });
+      const dialog = stateCopy.dialogs.find(
+        (e) => e.id === stateCopy.chosenCompanionId
+      );
+      if (dialog) dialog.messages.push(stateCopy.newMessageText);
+      stateCopy.newMessageText = '';
+      return stateCopy;
+    }
     case CHANGE_MESSAGE_TEXT: {
-      const stateCopy = { ...state }
-      stateCopy.newMessageText = action.messageText
-      return stateCopy
-      }
+      const stateCopy = { ...state };
+      stateCopy.newMessageText = action.messageText as string;
+      return stateCopy;
+    }
     case SWITCH_COMPANION: {
-      const stateCopy = { ...state }
-      stateCopy.chosenCompanionId = action.id
-      return stateCopy}
+      const stateCopy = { ...state };
+      stateCopy.chosenCompanionId = action.id as number;
+      return stateCopy;
+    }
     default:
-      return state
+      return state;
   }
 }

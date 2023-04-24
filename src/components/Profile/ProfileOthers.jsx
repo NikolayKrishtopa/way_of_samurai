@@ -1,17 +1,15 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import MyPost from './MyPost/MyPost'
-import s from './Profile.module.css'
+import MyPost from './MyPost/MyPost';
+import s from './Profile.module.css';
 
 export default function ProfileOthers(props) {
-  const { profilePage } = props
+  const { profilePage } = props;
 
   return (
     <div className={s.profile}>
       <div className={s.userInfo}>
         <img
           src={profilePage.profile.photos.large}
-          alt="фото пользователя"
+          alt='фото пользователя'
           className={s.avatar}
         />
         <div className={s.userDescription}>
@@ -51,5 +49,5 @@ export default function ProfileOthers(props) {
         ))}
       </div>
     </div>
-  )
+  );
 }
