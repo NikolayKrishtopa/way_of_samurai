@@ -1,8 +1,14 @@
-import { NavLink } from 'react-router-dom';
-import s from './Navbar.module.css';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { LanguageType } from '../../models/models';
+import { StoreType } from '../../redux/store-redux';
+const s = require('./Navbar.module.css');
 
-function Navbar(props) {
+export type NavBarPropsType = {
+  lang: LanguageType;
+};
+
+function Navbar(props: NavBarPropsType) {
   const { lang } = props;
   return (
     <div className={s.navbar}>
@@ -28,7 +34,7 @@ function Navbar(props) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreType) {
   return {
     lang: state.settings.lang,
   };

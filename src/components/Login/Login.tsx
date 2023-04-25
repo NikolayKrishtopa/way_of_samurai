@@ -1,16 +1,29 @@
-import useFormAndValidation from '../../../src/hooks/useFormAndValidation'
-import s from './Login.module.css'
+import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { LoginDataType } from '../../models/models';
+const s = require('./Login.module.css');
 
-export default function Login(props) {
-  const { onSubmit } = props
+type LoginProps = {
+  onSubmit: (arg: LoginDataType) => void;
+};
+
+export default function Login(props: LoginProps) {
+  const { onSubmit } = props;
+
+  type UseFormAndValidationType = {
+    values: LoginDataType;
+    handleChange: (e: any) => void;
+    errors: any;
+    isValid: boolean;
+    resetForm: () => void;
+  };
 
   const { values, handleChange, errors, isValid, resetForm } =
-    useFormAndValidation()
+    useFormAndValidation() as UseFormAndValidationType;
 
-  function handleSubmitForm(e) {
-    e.preventDefault()
-    onSubmit(values)
-    resetForm()
+  function handleSubmitForm(e: any) {
+    e.preventDefault();
+    onSubmit(values);
+    resetForm();
   }
 
   return (
@@ -21,11 +34,11 @@ export default function Login(props) {
             required
             minLength={3}
             maxLength={40}
-            type="text"
+            type='text'
             onChange={handleChange}
-            placeholder="логин"
+            placeholder='логин'
             className={s.loginPage__input}
-            name="email"
+            name='email'
             value={values.email ? values.email : ''}
           />
           <p className={s.loginPage__error}>{errors.email}</p>
@@ -35,27 +48,27 @@ export default function Login(props) {
             required
             minLength={3}
             maxLength={15}
-            type="password"
-            name="password"
+            type='password'
+            name='password'
             value={values.password ? values.password : ''}
             onChange={handleChange}
-            placeholder="пароль"
+            placeholder='пароль'
             className={s.loginPage__input}
           />
           <p className={s.loginPage__error}>{errors.password}</p>
         </div>
-        <label htmlFor="rememberMe" className={s.loginPage__checkBoxLabel}>
+        <label htmlFor='rememberMe' className={s.loginPage__checkBoxLabel}>
           <input
-            type="checkbox"
+            type='checkbox'
             className={s.loginPage__checkBox}
-            name="rememberMe"
+            name='rememberMe'
             value={values.rememberMe}
             onChange={handleChange}
           />
           Запомнить меня
         </label>
         <button
-          type="submit"
+          type='submit'
           className={`${s.loginPage__button} ${
             isValid && s.loginPage__button_active
           }`}
@@ -65,5 +78,5 @@ export default function Login(props) {
         </button>
       </form>
     </div>
-  )
+  );
 }

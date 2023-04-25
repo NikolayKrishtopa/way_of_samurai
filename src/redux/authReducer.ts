@@ -1,7 +1,7 @@
 import { ACTION_TYPES } from '../utils/action-creators';
 import actionCreators from '../utils/action-creators';
 import { authApi } from '../api/api';
-import { IAction } from '../models/models';
+import { IAction, LoginDataType } from '../models/models';
 import { Dispatch } from 'redux';
 
 const { setIsLoading, setUser } = actionCreators;
@@ -51,7 +51,7 @@ export default function profileReducer(state = initialState, action: IAction) {
 
 export const handleSubmitLoginReq =
   (
-    values: { email: string; password: string; rememberMe: boolean },
+    values: LoginDataType,
     redirectSuccess: () => void,
     redirectFail: () => void
   ) =>
@@ -104,7 +104,7 @@ export const handleLogOut =
       .logout()
       .then((res) => {
         if (res.data.resultCode === 0) {
-          dispatch(setUser({}));
+          dispatch(setUser({ id: null, login: null, email: null }));
           redirectSuccess();
         }
       })

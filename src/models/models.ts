@@ -13,6 +13,12 @@ export type ProfileType = {
   posts: any;
 };
 
+export type LoginDataType = {
+  email: string;
+  password: string;
+  rememberMe: string;
+};
+
 export type UserType = {
   id: number | null;
   login: string | null;

@@ -1,7 +1,13 @@
-// import spinner from '../../pictures/spinner.gif'
-import s from './PopupLoading.module.css';
+import { LanguageType } from '../../models/models';
 
-export default function PopupLoading(props) {
+// import spinner from '../../pictures/spinner.gif'
+const s = require('./PopupLoading.module.css');
+
+export type PopupLoadingPropsType = {
+  lang: LanguageType;
+};
+
+export default function PopupLoading(props: PopupLoadingPropsType) {
   const { lang } = props;
   return (
     <div className={s.popup}>

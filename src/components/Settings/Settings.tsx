@@ -1,10 +1,19 @@
+import { LanguageType, ThemeType } from '../../models/models';
+import { StoreType } from '../../redux/store-redux';
 import actionCreators from '../../utils/action-creators';
 import { connect } from 'react-redux';
-import s from './Settings.module.css';
+const s = require('./Settings.module.css');
 
 const { switchLang, switchTheme } = actionCreators;
 
-function Settings(props) {
+export type SettingsPropsType = {
+  theme: ThemeType;
+  lang: LanguageType;
+  switchLang: (lang: LanguageType) => void;
+  switchTheme: (theme: ThemeType) => void;
+};
+
+function Settings(props: SettingsPropsType) {
   const { theme, lang, switchLang, switchTheme } = props;
   return (
     <div className='settings'>
@@ -40,7 +49,7 @@ function Settings(props) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreType) {
   return {
     theme: state.settings.theme,
     lang: state.settings.lang,

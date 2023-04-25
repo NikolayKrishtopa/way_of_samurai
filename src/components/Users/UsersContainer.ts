@@ -1,16 +1,19 @@
-import Users from './Users'
-import actionCreators from '../../utils/action-creators'
-import { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-import PopupLoading from '../PopupLoading/PopupLoading'
-import ProtectedRoute from '../../hok/ProtectedRoute'
+import Users from './Users';
+import actionCreators from '../../utils/action-creators';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import PopupLoading from '../PopupLoading/PopupLoading';
+import ProtectedRoute from '../../hok/ProtectedRoute';
 
 import {
   getUsers,
   doFollowUser,
   doUnfollowUser,
-} from '../../redux/usersReducer'
+  UsersStateType,
+} from '../../redux/usersReducer';
+import { LanguageType } from '../../models/models';
+import { StoreType } from '../../redux/store-redux';
 
 const {
   setPage,
@@ -19,9 +22,22 @@ const {
   changeUserSearchText,
   submitUserSearch,
   setIsLoading,
-} = actionCreators
+} = actionCreators;
 
-function UsersContainer(props) {
+export type UsersPropsType = {
+  usersPage: UsersStateType;
+  setPage: (page: number) => void;
+  showAllUsers: boolean;
+  showOnlyFriends: boolean;
+  changeUserSearchText: (text: string) => void;
+  submitUserSearch: (user: string) => void;
+  getUsers: any;
+  doFollowUser: any;
+  doUnfollowUser: any;
+  lang: LanguageType;
+};
+
+function UsersContainer(props: UsersPropsType) {
   const {
     usersPage,
     setPage,
@@ -33,7 +49,7 @@ function UsersContainer(props) {
     doFollowUser,
     doUnfollowUser,
     lang,
-  } = props
+  } = props;
 
   const {
     isOnlyFriendsShown,
@@ -43,19 +59,19 @@ function UsersContainer(props) {
     users,
     isLoading,
     totalUsersQty,
-  } = usersPage
+  } = usersPage;
 
   useEffect(() => {
-    setPage(1)
-    getUsers(isOnlyFriendsShown, page, userSearch)
-  }, [userSearch, isOnlyFriendsShown])
+    setPage(1);
+    getUsers(isOnlyFriendsShown, page, userSearch);
+  }, [userSearch, isOnlyFriendsShown]);
 
   useEffect(() => {
     if (page === 1) {
-      return
+      return;
     }
-    getUsers(isOnlyFriendsShown, page, userSearch, users)
-  }, [page])
+    getUsers(isOnlyFriendsShown, page, userSearch, users);
+  }, [page]);
 
   return (
     <>
@@ -73,15 +89,15 @@ function UsersContainer(props) {
         lang={lang}
       />
     </>
-  )
+  );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreType) {
   return {
     usersPage: state.usersPage,
     isLogged: state.auth.isLogged,
     lang: state.settings.lang,
-  }
+  };
 }
 
 export default compose(
@@ -97,4 +113,4 @@ export default compose(
     doUnfollowUser,
   }),
   ProtectedRoute
-)(UsersContainer)
+)(UsersContainer);
