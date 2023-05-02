@@ -1,8 +1,16 @@
-import s from './Header.module.css';
-import logo from '../../pictures/logo.png';
 import { NavLink } from 'react-router-dom';
+import { AuthStateType, handleLogOut } from '../../redux/authReducer';
+import { LanguageType } from '../../models/models';
+const logo = require('../../pictures/logo.png');
+const s = require('./Header.module.css');
 
-export default function Header(props) {
+export type HeaderPropsType = {
+  auth: AuthStateType;
+  onLogOut: () => void;
+  lang: LanguageType;
+}
+
+export default function Header(props: HeaderPropsType) {
   const { auth, onLogOut, lang } = props;
   return (
     <div className={s.header}>

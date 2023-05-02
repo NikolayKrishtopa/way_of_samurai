@@ -3,9 +3,18 @@ import { connect } from 'react-redux';
 import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 import PopupLoading from '../PopupLoading/PopupLoading';
-import { checkIfAuthorised, handleLogOut } from '../../redux/authReducer';
+import { AuthStateType, checkIfAuthorised, handleLogOut } from '../../redux/authReducer';
+import { LanguageType } from '../../models/models';
+import { StoreType } from '../../redux/store-redux';
 
-function HeaderContainer(props) {
+export type HeaderContPropsType = {
+  auth: AuthStateType;
+  checkIfAuthorised: (profileRedirect: () => void, loginRedirect: () => void)=> void;
+  handleLogOut: (loginRedirect: () => void) => void;
+  lang: LanguageType
+}
+
+function HeaderContainer(props: HeaderContPropsType) {
   const { auth, checkIfAuthorised, handleLogOut, lang } = props;
 
   const navigate = useNavigate();
@@ -34,7 +43,7 @@ function HeaderContainer(props) {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreType) {
   return {
     auth: state.auth,
     lang: state.settings.lang,
