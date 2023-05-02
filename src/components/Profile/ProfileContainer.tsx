@@ -1,17 +1,25 @@
-import ProfileMine from './ProfileMine';
-import ProfileOthers from './ProfileOthers';
-import actionCreators from '../../utils/action-creators';
+import ProfileMine from './ProfileMine.tsx';
+import ProfileOthers from './ProfileOthers.tsx';
+import actionCreators from '../../utils/action-creators.ts';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { doUpdateProfile, doSetStatus } from '../../redux/profileReducer.ts';
-import PopupLoading from '../PopupLoading/PopupLoading';
-import ProtectedRoute from '../../hok/ProtectedRoute';
-const { addPost } = actionCreators;
+import PopupLoading from '../PopupLoading/PopupLoading.tsx';
+import ProtectedRoute from '../../hok/ProtectedRoute.tsx';
+import { StoreType } from '../../redux/store-redux.ts';
+import { IProfilePropsType } from './ProfileMine.tsx';
+const { addPost } = actionCreators; 
 
-function ProfileContainer(props) {
-  const { doUpdateProfile, myId, isLoading } = props;
+export interface IProfileContainerPropsType extends IProfilePropsType {
+  doUpdateProfile: (id: number | string) => void;
+  myId: number; 
+  isLoading:boolean;
+}
+
+function ProfileContainer(props: IProfileContainerPropsType) {
+  const { doUpdateProfile, myId, isLoading, lang } = props;
   const { userId = myId } = useParams();
 
   useEffect(() => {
@@ -20,7 +28,7 @@ function ProfileContainer(props) {
   }, [userId]);
 
   return isLoading ? (
-    <PopupLoading />
+    <PopupLoading lang={lang}/>
   ) : userId === myId ? (
     <ProfileMine {...props} />
   ) : (
@@ -28,7 +36,7 @@ function ProfileContainer(props) {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreType) {
   return {
     profilePage: state.profilePage,
     isLogged: state.auth.isLogged,

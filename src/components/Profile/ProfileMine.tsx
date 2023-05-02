@@ -1,10 +1,19 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import MyPost from './MyPost/MyPost';
-import s from './Profile.module.css';
 import { NavLink } from 'react-router-dom';
+import { ProfileStateType } from '../../redux/profileReducer';
+import { LanguageType } from '../../models/models';
+const  s = require('./Profile.module.css');
 
-export default function Profile(props) {
+export interface IProfilePropsType{
+profilePage: ProfileStateType;
+ addPost: (post: string) => void;
+ doSetStatus: (curStatus: string, newStatus: string) => void; 
+ lang: LanguageType
+}
+
+export default function Profile(props: IProfilePropsType) {
   const { profilePage, addPost, doSetStatus, lang } = props;
   const [newPostText, setNewPostText] = useState('');
   const [isStatusEditMode, setIsStatusEditMode] = useState(false);
@@ -21,7 +30,7 @@ export default function Profile(props) {
     setNewPostText('');
   }
 
-  function handleProfileChange(e) {
+  function handleProfileChange(e: {target:{value:string}}) {
     setCurrentStatusText(e.target.value);
   }
 
@@ -116,7 +125,7 @@ export default function Profile(props) {
         <h3 className={s.myPostsTitle}>
           {lang === 'EN' ? 'My posts:' : 'Мои публикации'}
         </h3>
-        {profilePage.profile.posts.map((e, i) => (
+        {profilePage.profile.posts.map((e:any, i:number) => (
           <MyPost
             postText={e.text}
             key={e.id}

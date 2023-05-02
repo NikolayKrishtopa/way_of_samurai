@@ -1,7 +1,13 @@
-import s from './MyPost.module.css'
-import likeIcon from '../../../pictures/likeIcon.svg'
+const likeIcon = require('../../../pictures/likeIcon.svg')
+const s = require('./MyPost.module.css')
 
-export default function MyPost(props) {
+export type MyPostPropsType = {
+  postText: string;
+  likes: Array<string|number>;
+  avatar:string
+}
+
+export default function MyPost(props: MyPostPropsType) {
   const { postText, likes, avatar } = props
 
   return (

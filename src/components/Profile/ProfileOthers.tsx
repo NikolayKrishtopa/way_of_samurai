@@ -1,7 +1,12 @@
+import { ProfileStateType } from '../../redux/profileReducer';
 import MyPost from './MyPost/MyPost';
-import s from './Profile.module.css';
+const s = require('./Profile.module.css');
 
-export default function ProfileOthers(props) {
+export type  ProfileOthersPropsType = {
+  profilePage: ProfileStateType,
+}
+
+export default function ProfileOthers(props: ProfileOthersPropsType) {
   const { profilePage } = props;
 
   return (
@@ -39,7 +44,7 @@ export default function ProfileOthers(props) {
         <h3 className={s.myPostsTitle}>
           {`${profilePage.profile.fullName}'s posts`}
         </h3>
-        {profilePage.profile.posts.map((e, i) => (
+        {profilePage.profile.posts.map((e:any, i:number) => (
           <MyPost
             postText={e.text}
             key={e.id}

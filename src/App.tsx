@@ -9,7 +9,7 @@ import ProfileContainer from './components/Profile/ProfileContainer'
 import Settings from './components/Settings/Settings'
 import UsersContainer from './components/Users/UsersContainer'
 
-export default function App(props) {
+export default function App() {
   return (
     <div className="page">
       <HeaderContainer />
