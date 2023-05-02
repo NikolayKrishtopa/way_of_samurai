@@ -1,19 +1,18 @@
-import Users from './Users';
-import actionCreators from '../../utils/action-creators';
+import Users from './Users.jsx';
+import actionCreators from '../../utils/action-creators.js';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import PopupLoading from '../PopupLoading/PopupLoading';
-import ProtectedRoute from '../../hok/ProtectedRoute';
+import ProtectedRoute from '../../hok/ProtectedRoute.js';
 
 import {
   getUsers,
   doFollowUser,
   doUnfollowUser,
   UsersStateType,
-} from '../../redux/usersReducer';
-import { LanguageType } from '../../models/models';
-import { StoreType } from '../../redux/store-redux';
+} from '../../redux/usersReducer.js';
+import { LanguageType } from '../../models/models.js';
+import { StoreType } from '../../redux/store-redux.js';
 
 const {
   setPage,
@@ -24,20 +23,20 @@ const {
   setIsLoading,
 } = actionCreators;
 
-export type UsersPropsType = {
+export type UsersContainerPropsType = {
   usersPage: UsersStateType;
   setPage: (page: number) => void;
-  showAllUsers: boolean;
-  showOnlyFriends: boolean;
+  showAllUsers: () => void;
+  showOnlyFriends: () => void;
   changeUserSearchText: (text: string) => void;
-  submitUserSearch: (user: string) => void;
+  submitUserSearch: () => void;
   getUsers: any;
   doFollowUser: any;
   doUnfollowUser: any;
   lang: LanguageType;
 };
 
-function UsersContainer(props: UsersPropsType) {
+function UsersContainer(props: UsersContainerPropsType) {
   const {
     usersPage,
     setPage,
@@ -57,7 +56,6 @@ function UsersContainer(props: UsersPropsType) {
     userSearch,
     usersShownPerPage,
     users,
-    isLoading,
     totalUsersQty,
   } = usersPage;
 
@@ -74,22 +72,23 @@ function UsersContainer(props: UsersPropsType) {
   }, [page]);
 
   return (
-    <>
-      {isLoading && <PopupLoading lang={lang} />}
-      <Users
-        usersPage={usersPage}
-        onFollowUser={doFollowUser}
-        onUnfollowUser={(id) => doUnfollowUser(id, users)}
-        onSetPage={setPage}
-        onShowAllUsers={showAllUsers}
-        onShowOnlyFriends={showOnlyFriends}
-        onChangeUserSearchText={changeUserSearchText}
-        onSubmitUserSearch={submitUserSearch}
-        isExtendButtonDisabled={totalUsersQty <= usersShownPerPage}
-        lang={lang}
-      />
-    </>
+    <Users
+      usersPage={usersPage}
+      onFollowUser={doFollowUser}
+      onUnfollowUser={(id: number) => doUnfollowUser(id, users)}
+      onSetPage={setPage}
+      onShowAllUsers={showAllUsers}
+      onShowOnlyFriends={showOnlyFriends}
+      onChangeUserSearchText={changeUserSearchText}
+      onSubmitUserSearch={submitUserSearch}
+      isExtendButtonDisabled={totalUsersQty <= usersShownPerPage}
+      lang={lang}
+    />
   );
+  // <>
+  //   {isLoading && <PopupLoading lang={lang} />}
+
+  // </>
 }
 
 function mapStateToProps(state: StoreType) {

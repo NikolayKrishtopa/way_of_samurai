@@ -1,7 +1,22 @@
-import User from './User/User'
-import s from './Users.module.css'
+import { LanguageType } from '../../models/models';
+import { UsersStateType } from '../../redux/usersReducer';
+import User from './User/User';
+const s = require('./Users.module.css');
 
-export default function Users(props) {
+export type UsersPropsType = {
+  usersPage: UsersStateType;
+  onFollowUser: any;
+  onUnfollowUser: any;
+  onSetPage: (page: number) => void;
+  onShowAllUsers: () => void;
+  onShowOnlyFriends: () => void;
+  onChangeUserSearchText: (text: string) => void;
+  onSubmitUserSearch: () => void;
+  isExtendButtonDisabled: boolean;
+  lang: LanguageType;
+};
+
+export default function Users(props: UsersPropsType) {
   const {
     usersPage,
     onFollowUser,
@@ -13,7 +28,7 @@ export default function Users(props) {
     onSubmitUserSearch,
     isExtendButtonDisabled,
     lang,
-  } = props
+  } = props;
 
   return (
     <>
@@ -24,7 +39,7 @@ export default function Users(props) {
           }`}
           onClick={onShowAllUsers}
         >
-          Все пользователи
+          {lang === 'RU' ? 'Все пользователи' : 'Get all users'}
         </button>
         <button
           className={`${s.showOnlyFriendsButton} ${
@@ -32,12 +47,12 @@ export default function Users(props) {
           }`}
           onClick={onShowOnlyFriends}
         >
-          Мои друзья
+          {lang === 'RU' ? 'Мои друзья' : 'My friends'}
         </button>
         <input
-          type="text"
+          type='text'
           className={s.searchLine}
-          placeholder="Введите имя пользователя"
+          placeholder={lang === 'RU' ? 'Введите имя пользователя' : 'Find user'}
           value={usersPage.searchUserTextValue}
           onChange={(e) => onChangeUserSearchText(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && onSubmitUserSearch()}
@@ -51,7 +66,7 @@ export default function Users(props) {
             onFollowUser={onFollowUser}
             onUnfollowUser={onUnfollowUser}
             followingInProgress={usersPage.followingInProcessList.some((u) => {
-              return e.id === u
+              return e.id === u;
             })}
           />
         ))}
@@ -63,8 +78,8 @@ export default function Users(props) {
         onClick={() => onSetPage(usersPage.page + 1)}
         disabled={isExtendButtonDisabled}
       >
-        Показать еще
+        {lang === 'RU' ? 'Показать еще' : 'Show more'}
       </button>
     </>
-  )
+  );
 }

@@ -1,8 +1,27 @@
-import { NavLink } from 'react-router-dom'
-import s from './User.module.css'
+import { NavLink } from 'react-router-dom';
+const s = require('./User.module.css');
 
-export default function User(props) {
-  const { user, onFollowUser, onUnfollowUser, followingInProgress } = props
+export type UserPropsType = {
+  user: {
+    id: number;
+    photos: any;
+    email: string;
+    name: string;
+    status: string;
+    location: {
+      country: string;
+      city: string;
+    };
+    about: string;
+    followed: boolean;
+  };
+  onFollowUser: (id: number) => void;
+  onUnfollowUser: (id: number) => void;
+  followingInProgress: boolean;
+};
+
+export default function User(props: UserPropsType) {
+  const { user, onFollowUser, onUnfollowUser, followingInProgress } = props;
 
   return (
     <div className={s.user}>
@@ -13,7 +32,7 @@ export default function User(props) {
               ? user.photos.small
               : 'https://klike.net/uploads/posts/2019-03/1551511801_1.jpg'
           }
-          alt="Аватар пользователя"
+          alt='Аватар пользователя'
           className={s.avatar}
         />
       </NavLink>
@@ -34,9 +53,9 @@ export default function User(props) {
           }`}
           onClick={() => {
             if (user.followed) {
-              onUnfollowUser(user.id)
+              onUnfollowUser(user.id);
             } else {
-              onFollowUser(user.id)
+              onFollowUser(user.id);
             }
           }}
           disabled={followingInProgress}
@@ -49,5 +68,5 @@ export default function User(props) {
         </button>
       </div>
     </div>
-  )
+  );
 }
